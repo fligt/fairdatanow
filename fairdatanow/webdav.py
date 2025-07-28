@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['RemoteData']
 
-# %% ../notebooks/10_exploring-your-remote-data.ipynb 17
+# %% ../notebooks/10_exploring-your-remote-data.ipynb 20
 import nc_py_api 
 from nc_py_api import Nextcloud 
 
@@ -19,7 +19,7 @@ import time
 import re 
 from IPython.display import HTML, display
 
-# %% ../notebooks/10_exploring-your-remote-data.ipynb 18
+# %% ../notebooks/10_exploring-your-remote-data.ipynb 21
 def _node_to_dataframe(fsnode): 
     '''Convert `fsnode` object to polars a single row polars dataframe.'''
 
@@ -37,7 +37,7 @@ class RemoteData(object):
     itables.options.maxBytes = 0
     itables.init_notebook_mode()
 
-    def __init__(self, configuration, search_regex='', searchBuilder={}): 
+    def __init__(self, configuration): 
         '''Recursively scan the contents of a remote webdav server as specified by `configuration`. 
         '''
 
@@ -46,28 +46,40 @@ class RemoteData(object):
         nextcloud_url, self.cache_dir = m.groups()
         nc_auth_user = configuration['user']
         nc_auth_pass = configuration['password'] 
-        
-        
-
-        print(f'Please wait while scanning all file paths in remote folder...')
-        
+               
         # Instantiate Nextcloud client 
-        self.nc = Nextcloud(nextcloud_url=nextcloud_url, nc_auth_user=nc_auth_user, nc_auth_pass=nc_auth_pass)
+        self.nc = Nextcloud(nextcloud_url=nextcloud_url, nc_auth_user=nc_auth_user, nc_auth_pass=nc_auth_pass) 
+        
 
+    def listdir(self, subdir=None, search_regex='', searchBuilder={}): 
+        '''Create interactive file table for remote subdirectory `subdir`. 
+
+        If subdir is not specified the complete project directory is scanned. 
+        '''
+
+        if subdir is None: 
+            subdir = self.cache_dir 
+
+        print(f'Please wait while scanning all file paths in remote folder...') 
+            
         # query webdav server to obtain file listing 
-        fs_nodes_list = self.nc.files.listdir(self.cache_dir, depth=-1, exclude_self=False) 
+        fs_nodes_list = self.nc.files.listdir(subdir, depth=-1, exclude_self=False) 
         
         n_paths = len(fs_nodes_list)
 
         # initialize polars dataframe with first row to fix schema 
-        self.df = _node_to_dataframe(fs_nodes_list[0])
+        self.df = _node_to_dataframe(fs_nodes_list[0]) 
 
+        # initially moved these lines below because I do not understand 
+        # how this could work after only reading the first line 
+        # well, perhaps because this is the size that is listed for the directory  
+        
         #sum the sizes to find the total storage space
         total_size_bytes = self.df['size'].sum()
         total_size = humanize.naturalsize(total_size_bytes, True)
         
         for fsnode in fs_nodes_list[1:]: 
-            self.df.extend(_node_to_dataframe(fsnode))
+            self.df.extend(_node_to_dataframe(fsnode)) 
 
         # create interactive table 
         self.itable = ITable(
@@ -81,7 +93,9 @@ class RemoteData(object):
 
         print(f"Ready building file table for '{self.cache_dir}'")
         print(f'Total number of files and directories: {n_paths}')
-        print(f'Total size of the files: {total_size}')
+        print(f'Total size of the files: {total_size}') 
+
+        return self.itable 
     
     def download_selected(self, cache_dir=None): 
         '''Download selected files (blue rows) from `table` to default local cache directory. 
@@ -145,7 +159,7 @@ class RemoteData(object):
                     now = int(time.time())
                     os.utime(local_path, (now, remote_modified_epoch_time)) 
                     
-        print(f"Ready with downloading {n_files} selected remote files to local cache: {local_path}                                                                      ")
+        print(f"Ready with downloading {n_files} selected remote files to local cache: {cache_path}                                                                      ")
 
         return local_path_list
 
