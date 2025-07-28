@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['RemoteData']
 
-# %% ../notebooks/10_exploring-your-remote-data.ipynb 18
+# %% ../notebooks/10_exploring-your-remote-data.ipynb 17
 import nc_py_api 
 from nc_py_api import Nextcloud 
 
@@ -19,7 +19,7 @@ import time
 import re 
 from IPython.display import HTML, display
 
-# %% ../notebooks/10_exploring-your-remote-data.ipynb 19
+# %% ../notebooks/10_exploring-your-remote-data.ipynb 18
 def _node_to_dataframe(fsnode): 
     '''Convert `fsnode` object to polars a single row polars dataframe.'''
 
