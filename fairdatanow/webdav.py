@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['RemoteData']
 
-# %% ../notebooks/10_exploring-your-remote-data.ipynb 20
+# %% ../notebooks/10_exploring-your-remote-data.ipynb 25
 import nc_py_api 
 from nc_py_api import Nextcloud 
 
@@ -19,7 +19,7 @@ import time
 import re 
 from IPython.display import HTML, display
 
-# %% ../notebooks/10_exploring-your-remote-data.ipynb 21
+# %% ../notebooks/10_exploring-your-remote-data.ipynb 26
 def _node_to_dataframe(fsnode): 
     '''Convert `fsnode` object to polars a single row polars dataframe.'''
 
@@ -85,7 +85,7 @@ class RemoteData(object):
         self.itable = ITable(
                     self.df,
                     layout={"top1": "searchBuilder"},
-                    select=True,
+                    select=True,  
                     search={"regex": True, "caseInsensitive": True, "search": search_regex},  
                     searchBuilder=searchBuilder, 
                     scrollY="500px", scrollCollapse=True, paging=False, 
