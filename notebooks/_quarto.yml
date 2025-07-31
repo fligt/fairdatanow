@@ -6,7 +6,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-    page-layout: article
+    page-layout: full
 
 website:
   page-navigation: true
