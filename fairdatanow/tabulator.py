@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['RemoteData2']
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 18
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 10
 import nc_py_api 
 from nc_py_api import Nextcloud 
 import panel as pn
@@ -15,7 +15,7 @@ import pandas as pd
 import os 
 import re
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 19
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 11
 pn.extension('tabulator')
 
 def _node_to_dataframe2(fsnode): 
@@ -26,14 +26,12 @@ def _node_to_dataframe2(fsnode):
 
     return df 
 
+
+
 class RemoteData2(object): 
     
     # See: https://help.nextcloud.com/t/using-nc-py-api-i-cant-download-any-file-due-to-ssl-certificte-verify-failed/194019 
     nc_py_api.options.NPA_NC_CERT = False 
-    
-    # keep full dataframe 
-    #itables.options.maxBytes = 0
-    #itables.init_notebook_mode()
 
     def __init__(self, configuration): 
         '''Recursively scan the contents of a remote webdav server as specified by `configuration`. 
@@ -67,19 +65,43 @@ class RemoteData2(object):
 
         # initialize polars dataframe with first row to fix schema 
         self.df = _node_to_dataframe2(fs_nodes_list[0]) 
-
-        # initially moved these lines below because I do not understand 
-        # how this could work after only reading the first line 
-        # well, perhaps because this is the size that is listed for the directory  
         
         #sum the sizes to find the total storage space
         total_size_bytes = self.df['size'].sum()
         total_size = humanize.naturalsize(total_size_bytes, True)
+
         
         for fsnode in fs_nodes_list[1:]: 
             self.df = pd.concat([self.df, _node_to_dataframe2(fsnode)], ignore_index=True) 
 
         self.df.reset_index()
 
-        return self.df
+        # panel components   
+        self.search_filter = pn.widgets.TextInput(name='Search filter', value='xray') 
+        self.file_table = pn.widgets.Tabulator(self.df, height=350, pagination=None, show_index=False)
+        self.row_counter = pn.pane.Str(f"Showing {len(self.df)} out of {len(self.df)} rows") 
+
+        # update file table and row counter to search filter 
+        self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))   
+
+        # create panel layout
+        self.layout = pn.Column(self.search_filter, self.file_table, self.row_counter)
+        
+
+        return self.layout 
+
+
+    
+    def _contains_filter(self, df, pattern, column): 
+        '''String contains `pattern` filter function on 'column` of dataframe `df`. '''
+        
+        if not pattern:
+            self.row_counter.object = f"Showing {len(df)} out of {len(df)} rows"
+            return df 
+            
+        filtered_df = df[df[column].str.contains(pattern)]
+        
+        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(df)} rows" 
+        
+        return filtered_df
 
