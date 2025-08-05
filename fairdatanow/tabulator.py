@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['RemoteData2']
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 11
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 12
 import nc_py_api 
 from nc_py_api import Nextcloud 
 import panel as pn
@@ -15,7 +15,7 @@ import pandas as pd
 import os 
 import re
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 12
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 13
 pn.extension('tabulator')
 
 def _node_to_dataframe2(fsnode): 
