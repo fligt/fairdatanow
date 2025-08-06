@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['to_iframe', 'RemoteData2']
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 11
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 12
 import nc_py_api 
 from nc_py_api import Nextcloud 
 import panel as pn
@@ -18,7 +18,7 @@ import html
 
 import ipynb_path
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 12
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 13
 pn.extension('tabulator')
 
 def _node_to_dataframe2(fsnode): 
@@ -30,12 +30,15 @@ def _node_to_dataframe2(fsnode):
     return df 
 
 def to_iframe(panel_layout, html_file, height=500): 
-    '''Embed interactive `panel_layout` object  as full HTML page in an iframe in a panel HTML pane. 
+    '''Save `panel_layout` object  as full HTML page `html_file` in *iframes* subfolder. 
+
+    Returns: `iframe_link` 
     
     In this way it should be possible to preserve rich interactive visualizations directly in web pages.
 
     See: https://panel.holoviz.org/reference/panes/HTML.html#html-documents  
     '''
+    
     # Create iframes subfolder 
     notebooks_dir = os.path.dirname(ipynb_path.get())
     iframes_dir = os.path.join(notebooks_dir, 'iframes')
@@ -45,9 +48,9 @@ def to_iframe(panel_layout, html_file, height=500):
     html_path = os.path.join(iframes_dir, html_file)
     panel_layout.save(html_path)
     
-    markdown_string = '```{=html}\n' + f'<iframe width="780" height="500" src="iframes/{html_file}" title="Webpage example"></iframe>\n' + '```\n'
+    iframe_link = f'<iframe width="100%" height="{height}" src="iframes/{html_file}" title="link"></iframe>'
 
-    return markdown_string
+    return iframe_link
 
     
 
