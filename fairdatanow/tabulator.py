@@ -16,6 +16,7 @@ import os
 import re
 import html 
 from io import StringIO 
+from IPython.display import display, HTML
 
 # %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 13
 pn.extension('tabulator')
@@ -49,9 +50,7 @@ def to_iframe(panel_layout, height=500):
     iframe_html = f'<iframe srcdoc="{escaped_html}" style="height:100%; width:100%" frameborder="0"></iframe>'
     
     # Display iframe in a Panel HTML pane
-    html_pane = pn.pane.HTML(iframe_html, height=height, sizing_mode="stretch_width")
-
-    return html_pane 
+    display(HTML(iframe_html)) 
     
 
 class RemoteData2(object): 
