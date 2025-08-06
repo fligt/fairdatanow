@@ -100,17 +100,25 @@ class RemoteData2(object):
             self.df = pd.concat([self.df, _node_to_dataframe2(fsnode)], ignore_index=True) 
 
         self.df.reset_index()
-
+        
         # panel components   
         self.search_filter = pn.widgets.TextInput(name='Search filter', value='xray') 
+        self.isdir_cb = pn.widgets.Checkbox(name='show directories')
+        self.type_select = pn.widgets.MultiChoice(name='filter extensions',options=self.df['ext'].unique().tolist())
+        
         self.file_table = pn.widgets.Tabulator(self.df, height=350, pagination=None, show_index=False)
-        self.row_counter = pn.pane.Str(f"Showing {len(self.df)} out of {len(self.df)} rows") 
+        
+        self.row_counter = pn.pane.Str(f"Showing {len(self.df)} out of {len(self.df)} rows")
+
 
         # update file table and row counter to search filter 
-        self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))   
+        self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))
+        self.file_table.add_filter(pn.bind(self._show_directories, column='isdir'))
+        self.file_table.add_filter(self.type_select, 'ext')
 
         # create panel layout
-        self.layout = pn.Column(self.search_filter, self.file_table, self.row_counter)
+        self.top_row = pn.Row(self.search_filter, self.isdir_cb, self.type_select)
+        self.layout = pn.Column(self.top_row, self.file_table, self.row_counter)
         
 
         return self.layout 
@@ -121,12 +129,30 @@ class RemoteData2(object):
         '''String contains `pattern` filter function on 'column` of dataframe `df`. '''
         
         if not pattern:
-            self.row_counter.object = f"Showing {len(df)} out of {len(df)} rows"
+            self._update_row_counter(df)
             return df 
             
         filtered_df = df[df[column].str.contains(pattern)]
         
-        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(df)} rows" 
+        self._update_row_counter(filtered_df)
         
         return filtered_df
+
+    def _show_directories(self, df, column):
+        '''When the show directories checkbox is True then show everything.
+        If False only show files.'''
+
+        if self.isdir_cb.value:
+            self._update_row_counter(df)
+            return df
+
+        filtered_df = df[df[column] == False]
+
+        self._update_row_counter(filtered_df)
+        
+        return filtered_df
+
+    def _update_row_counter(self, filtered_df):
+        '''Updates the value of the row counter'''
+        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(self.df)} rows"
 
