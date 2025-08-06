@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['to_iframe', 'RemoteData2']
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 12
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 13
 import nc_py_api 
 from nc_py_api import Nextcloud 
 import panel as pn
@@ -17,8 +17,10 @@ import re
 import html 
 from io import StringIO 
 from IPython.display import display, HTML
+from pathlib import Path 
+import time 
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 13
+# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 14
 pn.extension('tabulator')
 
 def _node_to_dataframe2(fsnode): 
@@ -101,29 +103,100 @@ class RemoteData2(object):
 
         self.df.reset_index()
         
-        # panel components   
+        self.layout = self._build_layout()
+        
+        return self.layout 
+
+    def download_selected(self, cache_dir=None):
+        '''Download selected files (blue rows) from `table` to default local cache directory. 
+        
+        A custom `cache_dir` can be specified. '''
+        
+        # create cache path 
+        if cache_dir is None: 
+            cache_path = Path.home().joinpath('.cache', 'fairdatanow')
+        else: 
+            cache_path = Path.home().joinpath('.cache', cache_dir)
+    
+        os.makedirs(cache_path, exist_ok=True)
+    
+        # obtain remote paths and remote timestamps 
+        local_path_list = []
+        remote_path_list = self.file_table.selected_dataframe['path'].tolist()
+        remote_modified_list = self.file_table.selected_dataframe['modified'].tolist()
+        remote_isdir_list = self.file_table.selected_dataframe['isdir'].tolist()
+        
+        n_files = len(remote_path_list)
+       
+        for i, [remote_path, remote_modified, remote_isdir] in enumerate(zip(remote_path_list, remote_modified_list, remote_isdir_list)): 
+    
+            # only download actual files 
+            if not remote_isdir:   
+                remote_directory = os.path.dirname(remote_path)
+                local_directory = cache_path.joinpath(remote_directory) # I guess this will not yet work for Windows
+                
+                # create directory structure inside cache 
+                os.makedirs(local_directory, exist_ok=True) 
+            
+                # get remote epoch time  
+                remote_modified_epoch_time = remote_modified.timestamp()
+            
+                # construct corresponding local path 
+                local_path = cache_path.joinpath(remote_path) 
+                local_path_list.append(str(local_path))
+                
+            
+                # check if local file exists and if modification times are similar 
+                is_local = local_path.exists()  
+            
+                is_similar = False 
+                local_modified_epoch_time = None 
+                if is_local: 
+                    local_modified_epoch_time = os.stat(local_path).st_mtime
+                    if local_modified_epoch_time == remote_modified_epoch_time: 
+                        is_similar = True 
+                        
+                # download from nextcloud 
+                if not is_similar: 
+                    print(f'[{i}/{n_files - 1}] Timestamps do no match: {remote_modified_epoch_time} vs {local_modified_epoch_time}', end='\r')
+                    print(f'[{i}/{n_files - 1}] Downloading to: {local_path}                                                       ' , end='\r')
+                      
+                    # write to cache 
+                    with open(local_path, 'bw') as fh: 
+                        self.nc.files.download2stream(remote_path, fh) 
+                        
+                    # adjust last modified timestamp 
+                    now = int(time.time())
+                    os.utime(local_path, (now, remote_modified_epoch_time)) 
+                    
+        print(f"Ready with downloading {n_files} selected remote files to local cache: {cache_path}                                                                      ")
+
+        return local_path_list
+
+    def _build_layout(self):
+        # panel components
+
+        # top filters
         self.search_filter = pn.widgets.TextInput(name='Search filter', value='xray') 
         self.isdir_cb = pn.widgets.Checkbox(name='show directories')
         self.type_select = pn.widgets.MultiChoice(name='filter extensions',options=self.df['ext'].unique().tolist())
-        
+
+        # put filters in a row
+        self.top_row = pn.Row(self.search_filter, self.isdir_cb, self.type_select)
+
+        # middle table
         self.file_table = pn.widgets.Tabulator(self.df, height=350, pagination=None, show_index=False)
-        
+
+        # bottom information
         self.row_counter = pn.pane.Str(f"Showing {len(self.df)} out of {len(self.df)} rows")
 
-
-        # update file table and row counter to search filter 
+        # add filters to the table
         self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))
         self.file_table.add_filter(pn.bind(self._show_directories, column='isdir'))
         self.file_table.add_filter(self.type_select, 'ext')
 
-        # create panel layout
-        self.top_row = pn.Row(self.search_filter, self.isdir_cb, self.type_select)
-        self.layout = pn.Column(self.top_row, self.file_table, self.row_counter)
-        
-
-        return self.layout 
-
-
+        # return the layout
+        return pn.Column(self.top_row, self.file_table, self.row_counter)
     
     def _contains_filter(self, df, pattern, column): 
         '''String contains `pattern` filter function on 'column` of dataframe `df`. '''
