@@ -5,7 +5,6 @@
 # %% auto 0
 __all__ = ['to_iframe', 'RemoteData2']
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 13
 import nc_py_api 
 from nc_py_api import Nextcloud 
 import panel as pn
@@ -18,9 +17,9 @@ import html
 from io import StringIO 
 from IPython.display import display, HTML
 from pathlib import Path 
-import time 
+import time
+import ipynb_path
 
-# %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 14
 pn.extension('tabulator')
 
 def _node_to_dataframe2(fsnode): 
@@ -31,28 +30,26 @@ def _node_to_dataframe2(fsnode):
 
     return df 
 
-def to_iframe(panel_layout, height=500): 
+def to_iframe(panel_layout, html_file, height=500): 
     '''Embed interactive `panel_layout` object  as full HTML page in an iframe in a panel HTML pane. 
     
     In this way it should be possible to preserve rich interactive visualizations directly in web pages.
 
     See: https://panel.holoviz.org/reference/panes/HTML.html#html-documents  
     '''
+    # Create iframes subfolder 
+    notebooks_dir = os.path.dirname(ipynb_path.get())
+    iframes_dir = os.path.join(notebooks_dir, 'iframes')
+    os.makedirs(iframes_dir, exist_ok=True)
+    
+    # Save the plot as html file to iframes subfolder 
+    html_path = os.path.join(iframes_dir, html_file)
+    panel_layout.save(html_path)
+    
+    markdown_string = '```{=html}\n' + f'<iframe width="780" height="500" src="iframes/{html_file}" title="Webpage example"></iframe>\n' + '```\n'
 
-    # Save the plot. We use a StringIO object in the reference guide to avoid saving to disk.
-    html_file = StringIO()
-    panel_layout.save(html_file)
-    html_file.seek(0)  # Move to the beginning of the StringIO object
-    
-    # Read the HTML content and escape it
-    html_content = html_file.read()
-    escaped_html = html.escape(html_content)
-    
-    # Create iframe embedding the escaped HTML and display it
-    iframe_html = f'<iframe srcdoc="{escaped_html}" style="height:100%; width:100%" frameborder="0"></iframe>'
-    
-    # Display iframe in a Panel HTML pane
-    display(HTML(iframe_html)) 
+    return markdown_string
+
     
 
 class RemoteData2(object): 
