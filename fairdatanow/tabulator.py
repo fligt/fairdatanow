@@ -196,9 +196,15 @@ class RemoteData2(object):
         self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))
         self.file_table.add_filter(self.type_select, 'ext')
 
+        # add a watcher to the multichoice
+        self.type_select.param.watch(self._update_ext_filter, 'value')
+
         # return the layout
         return pn.Column(self.top_row, self.file_table, self.row_counter)
 
+    def _update_ext_filter(self, event):
+        '''Updates the row counter everytime a change is made in the MultiChoice widget.'''
+        self._update_row_counter(self.file_table.current_view)
     
     def _contains_filter(self, df, pattern, column): 
         '''String contains `pattern` filter function on 'column` of dataframe `df`. '''
@@ -212,7 +218,7 @@ class RemoteData2(object):
         self._update_row_counter(filtered_df)
         
         return filtered_df
-
+    
     def _update_row_counter(self, filtered_df):
         '''Updates the value of the row counter'''
         self.row_counter.object = f"Showing {len(filtered_df)} out of {len(self.df)} rows"
