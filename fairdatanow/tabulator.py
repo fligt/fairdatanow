@@ -74,10 +74,10 @@ class RemoteData2(object):
         self.nc = Nextcloud(nextcloud_url=nextcloud_url, nc_auth_user=nc_auth_user, nc_auth_pass=nc_auth_pass) 
         
 
-    def listdir(self, subdir=None, search_regex='', searchBuilder={}): 
+    def listdir(self, subdir=None, search_regex='', searchBuilder={}, show_directories=False): 
         '''Create interactive file table for remote subdirectory `subdir`. 
 
-        If subdir is not specified the complete project directory is scanned. 
+        If subdir is not specified the complete project directory is scanned.
         '''
 
         if subdir is None: 
@@ -99,7 +99,10 @@ class RemoteData2(object):
 
         
         for fsnode in fs_nodes_list[1:]: 
-            self.df = pd.concat([self.df, _node_to_dataframe2(fsnode)], ignore_index=True) 
+            self.df = pd.concat([self.df, _node_to_dataframe2(fsnode)], ignore_index=True)
+
+        if not show_directories:
+            self.df = self.df[self.df['isdir'] == False]
 
         self.df.reset_index()
 
@@ -178,11 +181,10 @@ class RemoteData2(object):
 
         # top filters
         self.search_filter = pn.widgets.TextInput(name='Search filter', value='xray') 
-        self.isdir_cb = pn.widgets.Checkbox(name='show directories')
         self.type_select = pn.widgets.MultiChoice(name='filter extensions',options=self.df['ext'].unique().tolist())
 
         # put filters in a row
-        self.top_row = pn.Row(self.search_filter, self.isdir_cb, self.type_select)
+        self.top_row = pn.Row(self.search_filter, self.type_select)
 
         # middle table
         self.file_table = pn.widgets.Tabulator(self.df, height=350, pagination=None, show_index=False)
@@ -192,7 +194,6 @@ class RemoteData2(object):
 
         # add filters to the table
         self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))
-        self.file_table.add_filter(pn.bind(self._show_directories, column='isdir'))
         self.file_table.add_filter(self.type_select, 'ext')
 
         # return the layout
@@ -208,20 +209,6 @@ class RemoteData2(object):
             
         filtered_df = df[df[column].str.contains(pattern)]
         
-        self._update_row_counter(filtered_df)
-        
-        return filtered_df
-
-    def _show_directories(self, df, column):
-        '''When the show directories checkbox is True then show everything.
-        If False only show files.'''
-
-        if self.isdir_cb.value:
-            self._update_row_counter(df)
-            return df
-
-        filtered_df = df[df[column] == False]
-
         self._update_row_counter(filtered_df)
         
         return filtered_df
