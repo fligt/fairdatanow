@@ -221,5 +221,8 @@ class RemoteData2(object):
     
     def _update_row_counter(self, filtered_df):
         '''Updates the value of the row counter'''
-        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(self.df)} rows"
+        file_df = filtered_df[filtered_df['isdir'] == False]
+        total_bytes = file_df['byte_size'].sum()
+        total_size = humanize.naturalsize(total_bytes, True)
+        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(self.df)} rows, size: {total_size}"
 
