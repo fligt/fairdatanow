@@ -186,8 +186,10 @@ class RemoteData2(object):
         # put filters in a row
         self.top_row = pn.Row(self.search_filter, self.type_select)
 
-        # middle table
-        self.file_table = pn.widgets.Tabulator(self.df, height=350, pagination=None, show_index=False)
+        # middle table 
+        # selectable=True implies that by (shift/Ctrl) clicking you can select and deselect rows 
+        # disabled=True implies thatyou can not edit the table 
+        self.file_table = pn.widgets.Tabulator(self.df, height=350, pagination=None, show_index=False, selectable=True, disabled=True)
 
         # bottom information
         self.row_counter = pn.pane.Str(f"Showing {len(self.df)} out of {len(self.df)} rows")
