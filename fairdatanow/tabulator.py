@@ -7,7 +7,7 @@ __all__ = ['to_iframe', 'RemoteData2']
 
 # %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 14
 import nc_py_api 
-from nc_py_api import Nextcloud 
+from nc_py_api import Nextcloud
 import panel as pn
 import param 
 import humanize
@@ -22,11 +22,16 @@ import ipynb_path
 # %% ../notebooks/11_exploring-your-remote-data-with-tabulator.ipynb 15
 pn.extension('tabulator')
 
+
 def _node_to_dataframe2(fsnode): 
     '''Convert `fsnode` object to polars a single row polars dataframe.'''
 
-    df = pd.DataFrame({'path': [fsnode.user_path], 'size': [fsnode.info.size], 'mimetype': [fsnode.info.mimetype], 'modified': [fsnode.info.last_modified], 
-                   'isdir': [fsnode.is_dir], 'ext': [os.path.splitext(fsnode.user_path)[1]]})
+    df = pd.DataFrame({'path': [fsnode.user_path],
+                       'size': [humanize.naturalsize(fsnode.info.size, True)],
+                       'ext': [os.path.splitext(fsnode.user_path)[1].lower()],
+                       'byte_size': [fsnode.info.size],
+                       'modified': [fsnode.info.last_modified], 
+                       'isdir': [fsnode.is_dir]})
 
     return df 
 
@@ -90,14 +95,9 @@ class RemoteData2(object):
         
         n_paths = len(fs_nodes_list)
 
-        # initialize polars dataframe with first row to fix schema 
+        # initialize pandas dataframe with first row to fix schema 
         self.df = _node_to_dataframe2(fs_nodes_list[0]) 
-        
-        #sum the sizes to find the total storage space
-        total_size_bytes = self.df['size'].sum()
-        total_size = humanize.naturalsize(total_size_bytes, True)
-
-        
+         
         for fsnode in fs_nodes_list[1:]: 
             self.df = pd.concat([self.df, _node_to_dataframe2(fsnode)], ignore_index=True)
 
@@ -175,7 +175,7 @@ class RemoteData2(object):
         print(f"Ready with downloading {n_files} selected remote files to local cache: {cache_path}                                                                      ")
 
         return local_path_list
-
+    
     def _build_layout(self):
         # panel components
 
@@ -198,9 +198,15 @@ class RemoteData2(object):
         self.file_table.add_filter(pn.bind(self._contains_filter, pattern=self.search_filter, column='path'))
         self.file_table.add_filter(self.type_select, 'ext')
 
+        # add a watcher to the multichoice
+        self.type_select.param.watch(self._update_ext_filter, 'value')
+
         # return the layout
         return pn.Column(self.top_row, self.file_table, self.row_counter)
 
+    def _update_ext_filter(self, event):
+        '''Updates the row counter everytime a change is made in the MultiChoice widget.'''
+        self._update_row_counter(self.file_table.current_view)
     
     def _contains_filter(self, df, pattern, column): 
         '''String contains `pattern` filter function on 'column` of dataframe `df`. '''
@@ -214,8 +220,11 @@ class RemoteData2(object):
         self._update_row_counter(filtered_df)
         
         return filtered_df
-
+    
     def _update_row_counter(self, filtered_df):
         '''Updates the value of the row counter'''
-        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(self.df)} rows"
+        file_df = filtered_df[filtered_df['isdir'] == False]
+        total_bytes = file_df['byte_size'].sum()
+        total_size = humanize.naturalsize(total_bytes, True)
+        self.row_counter.object = f"Showing {len(filtered_df)} out of {len(self.df)} rows, size: {total_size}"
 
