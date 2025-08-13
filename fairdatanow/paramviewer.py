@@ -8,6 +8,7 @@ import panel as pn
 import param
 from panel.viewable import Viewer
 import pandas as pd
+from humanize import naturalsize
 
 pn.extension("tabulator")
 
@@ -15,25 +16,33 @@ pn.extension("tabulator")
 class DataViewer(Viewer):
     data = param.DataFrame()
 
-    columns = param.ListSelector(default=["path"])
+    columns = param.ListSelector(default=["path", "size", "modified"])
 
     search = param.String(default="xray")
+
+    bytes_amount = param.Integer()
     
     filtered_data = param.DataFrame()
 
     def __init__(self, **params):
         super().__init__(**params)
+        # load all options for the ListSelectors
         self.param.columns.objects = self.data.columns.to_list()
 
     @param.depends("data", "columns", "search", watch=True, on_init=True)
     def _update_filtered_data(self):
+        # set the base df for readability and a non-watched variable
         df = self.data
+        # search the dataframe in column path if it contains the search string
         searched_df = df[df["path"].str.contains(self.search)]
+        # save the total bytes_size in the bytes_amount variable
+        self.bytes_amount = searched_df['byte_size'].sum()
+        # only select the columns from the column selector
         self.filtered_data = searched_df[self.columns]
     
     @param.depends("filtered_data")
     def number_of_rows(self):
-        return f"Rows: {len(self.filtered_data)}"
+        return f"Rows: {len(self.filtered_data)} Filesize: {naturalsize(self.bytes_amount, True)}"
     
     def __panel__(self):
         return pn.Column(
