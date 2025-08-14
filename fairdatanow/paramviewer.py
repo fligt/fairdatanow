@@ -3,19 +3,21 @@
 # %% auto 0
 __all__ = ['DataViewer']
 
-# %% ../notebooks/12_dataviewer.ipynb 5
+# %% ../notebooks/12_dataviewer.ipynb 6
 import panel as pn
 import param
-from panel.viewable import Viewer
 import pandas as pd
-from humanize import naturalsize
 import nc_py_api
 import re
 import os
+from panel.viewable import Viewer
+from humanize import naturalsize
+from pathlib import Path
+import time
 
 pn.extension("tabulator")
 
-# %% ../notebooks/12_dataviewer.ipynb 6
+# %% ../notebooks/12_dataviewer.ipynb 7
 class DataViewer(Viewer):
     # DataFrames
     data = param.DataFrame()
@@ -67,8 +69,70 @@ class DataViewer(Viewer):
                 } for fsnode in fsnodes]
         
         return pd.DataFrame(data)
+       
+    def download_selected(self, cache_dir=None):
+        '''Download selected files (blue rows) from `table` to default local cache directory. 
         
+        A custom `cache_dir` can be specified. '''
         
+        # create cache path 
+        if cache_dir is None: 
+            cache_path = Path.home().joinpath('.cache', 'fairdatanow')
+        else: 
+            cache_path = Path.home().joinpath('.cache', cache_dir)
+    
+        os.makedirs(cache_path, exist_ok=True)
+
+        remote_data = self.data.iloc[self._file_table.selected_dataframe.index.tolist()]
+
+        # obtain remote paths and remote timestamps 
+        local_path_list = []
+       
+        for i, [remote_path, remote_modified, remote_isdir] in enumerate(zip(remote_data['path'].tolist(), remote_data['modified'].tolist(), remote_data['isdir'].tolist())): 
+    
+            # only download actual files 
+            if not remote_isdir:   
+                remote_directory = os.path.dirname(remote_path)
+                local_directory = cache_path.joinpath(remote_directory) # I guess this will not yet work for Windows
+                
+                # create directory structure inside cache 
+                os.makedirs(local_directory, exist_ok=True) 
+            
+                # get remote epoch time  
+                remote_modified_epoch_time = remote_modified.timestamp()
+            
+                # construct corresponding local path 
+                local_path = cache_path.joinpath(remote_path) 
+                local_path_list.append(str(local_path))
+                
+            
+                # check if local file exists and if modification times are similar 
+                is_local = local_path.exists()  
+            
+                is_similar = False 
+                local_modified_epoch_time = None 
+                if is_local: 
+                    local_modified_epoch_time = os.stat(local_path).st_mtime
+                    if local_modified_epoch_time == remote_modified_epoch_time: 
+                        is_similar = True 
+                        
+                # download from nextcloud 
+                if not is_similar: 
+                    print(f'[{i+1}/{len(remote_data)}] Timestamps do no match: {remote_modified_epoch_time} vs {local_modified_epoch_time}', end='\r')
+                    print(f'[{i+1}/{len(remote_data)}] Downloading to: {local_path}                                                       ' , end='\r')
+                      
+                    # write to cache 
+                    with open(local_path, 'bw') as fh: 
+                        self.nc.files.download2stream(remote_path, fh) 
+                        
+                    # adjust last modified timestamp 
+                    now = int(time.time())
+                    os.utime(local_path, (now, remote_modified_epoch_time)) 
+                    
+        print(f"Ready with downloading {len(remote_data)} selected remote files to local cache: {cache_path}                                                                      ")
+
+        return local_path_list
+    
     @param.depends("data", "columns", "search", "extensions", "show_directories", watch=True)
     def _update_filtered_data(self):
         # set the base df for readability and a non-watched variable
@@ -103,11 +167,12 @@ class DataViewer(Viewer):
         
     
     def __panel__(self):
+        self._file_table = pn.widgets.Tabulator(self.param.filtered_data, height=350, pagination=None, show_index=False, selectable=True, disabled=True)
         return pn.Column(
             pn.Row(pn.widgets.TextInput.from_param(self.param.search), 
                    pn.widgets.Checkbox.from_param(self.param.show_filters),
                    self.make_widgetbox
                   ),
-            pn.widgets.Tabulator(self.param.filtered_data, height=350, pagination=None, show_index=False, selectable=True, disabled=True),
+            self._file_table,
             self.number_of_rows
         )
