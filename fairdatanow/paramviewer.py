@@ -14,17 +14,17 @@ pn.extension("tabulator")
 
 # %% ../notebooks/12_dataviewer.ipynb 8
 class DataViewer(Viewer):
+    # DataFrames
     data = param.DataFrame()
-
-    columns = param.ListSelector(default=["path", "size", "modified"])
-
-    extensions = param.ListSelector(default=[])
-    
-    search = param.String(default="xray")
-
-    bytes_amount = param.Integer()
-    
     filtered_data = param.DataFrame()
+    # list filters
+    columns = param.ListSelector(default=["path", "size", "modified"])
+    extensions = param.ListSelector(default=[])
+    # typed filters
+    search = param.String(default="xray")
+    bytes_amount = param.Integer()
+    show_directories = param.Boolean(default=False)
+    
 
     def __init__(self, **params):
         super().__init__(**params)
@@ -33,7 +33,7 @@ class DataViewer(Viewer):
         self.param.extensions.objects = self.data['ext'].unique()
 
     
-    @param.depends("data", "columns", "search", "extensions", watch=True, on_init=True)
+    @param.depends("data", "columns", "search", "extensions", "show_directories", watch=True, on_init=True)
     def _update_filtered_data(self):
         # set the base df for readability and a non-watched variable
         df = self.data
@@ -41,9 +41,12 @@ class DataViewer(Viewer):
         df = df[df["path"].str.contains(self.search)]
         # filter to only include the extensions that are selected
         if self.extensions:
-            df = df[df['ext'].isin(self.extensions)]
+            df = df[df["ext"].isin(self.extensions)]
         # save the total bytes_size in the bytes_amount variable
-        self.bytes_amount = df['byte_size'].sum()
+        self.bytes_amount = df[df["isdir"] == False]["byte_size"].sum()
+        # if show_directories is turned off exclude them from the df
+        if not self.show_directories:
+            df = df[df["isdir"] == False]
         # only select the columns from the column selector
         self.filtered_data = df[self.columns]
     
@@ -55,7 +58,8 @@ class DataViewer(Viewer):
         return pn.Column(
             pn.Row(pn.widgets.TextInput.from_param(self.param.search), 
                    pn.widgets.MultiChoice.from_param(self.param.columns),
-                   pn.widgets.MultiChoice.from_param(self.param.extensions)
+                   pn.widgets.MultiChoice.from_param(self.param.extensions),
+                   pn.widgets.Checkbox.from_param(self.param.show_directories)
                   ),
             pn.widgets.Tabulator(self.param.filtered_data, height=350, pagination=None, show_index=False, selectable=True, disabled=True),
             self.number_of_rows
