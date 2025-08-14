@@ -3,16 +3,19 @@
 # %% auto 0
 __all__ = ['DataViewer']
 
-# %% ../notebooks/12_dataviewer.ipynb 7
+# %% ../notebooks/12_dataviewer.ipynb 5
 import panel as pn
 import param
 from panel.viewable import Viewer
 import pandas as pd
 from humanize import naturalsize
+import nc_py_api
+import re
+import os
 
 pn.extension("tabulator")
 
-# %% ../notebooks/12_dataviewer.ipynb 8
+# %% ../notebooks/12_dataviewer.ipynb 6
 class DataViewer(Viewer):
     # DataFrames
     data = param.DataFrame()
@@ -26,14 +29,47 @@ class DataViewer(Viewer):
     show_directories = param.Boolean(default=False)
     show_filters = param.Boolean(default=False)
 
-    def __init__(self, **params):
+    #non param attributes
+    nc_py_api.options.NPA_NC_CERT = False 
+
+    def __init__(self, configuration, subdir=None, **params):
         super().__init__(**params)
-        # load all options for the ListSelectors
+        self.nc = self._create_connector(configuration)
+        # load all param attributes where necessary
+        self.data = self._load_dataframe(subdir)
         self.param.columns.objects = self.data.columns.to_list()
         self.param.extensions.objects = self.data['ext'].unique()
 
-    
-    @param.depends("data", "columns", "search", "extensions", "show_directories", watch=True, on_init=True)
+    def _create_connector(self, configuration):
+        # parse configuration 
+        m = re.match('(^https://[^/]+/)(.*)', configuration['url'])
+        nextcloud_url, self.cache_dir = m.groups()
+        nc_auth_user = configuration['user']
+        nc_auth_pass = configuration['password']
+        
+        return nc_py_api.Nextcloud(nextcloud_url=nextcloud_url,
+                                   nc_auth_user=nc_auth_user,
+                                   nc_auth_pass=nc_auth_pass)
+
+    @pn.cache()
+    def _load_dataframe(self, subdir):
+        if subdir is None:
+            subdir = self.cache_dir
+
+        fsnodes = self.nc.files.listdir(subdir, depth=-1, exclude_self=False)
+
+        data = [{'path': fsnode.user_path,
+                'size': naturalsize(fsnode.info.size, True),
+                'ext': os.path.splitext(fsnode.user_path)[1].lower(),
+                'byte_size': fsnode.info.size,
+                'modified': fsnode.info.last_modified,
+                'isdir': fsnode.is_dir
+                } for fsnode in fsnodes]
+        
+        return pd.DataFrame(data)
+        
+        
+    @param.depends("data", "columns", "search", "extensions", "show_directories", watch=True)
     def _update_filtered_data(self):
         # set the base df for readability and a non-watched variable
         df = self.data
