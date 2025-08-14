@@ -24,7 +24,7 @@ class DataViewer(Viewer):
     search = param.String(default="xray")
     bytes_amount = param.Integer()
     show_directories = param.Boolean(default=False)
-    
+    show_filters = param.Boolean(default=False)
 
     def __init__(self, **params):
         super().__init__(**params)
@@ -53,14 +53,29 @@ class DataViewer(Viewer):
     @param.depends("filtered_data")
     def number_of_rows(self):
         return f"Rows: {len(self.filtered_data)}/{len(self.data)} Filesize: {naturalsize(self.bytes_amount, True)}"
+
+    @param.depends("show_filters")
+    def make_widgetbox(self):
+        if self.show_filters:
+            self.filter_menu = pn.WidgetBox('# Filters',
+                                            pn.widgets.MultiChoice.from_param(self.param.columns),
+                                            pn.widgets.MultiChoice.from_param(self.param.extensions),
+                                            pn.widgets.Checkbox.from_param(self.param.show_directories)
+                                           )
+            return self.filter_menu
+        self.filter_menu = None
+        
     
     def __panel__(self):
         return pn.Column(
             pn.Row(pn.widgets.TextInput.from_param(self.param.search), 
-                   pn.widgets.MultiChoice.from_param(self.param.columns),
-                   pn.widgets.MultiChoice.from_param(self.param.extensions),
-                   pn.widgets.Checkbox.from_param(self.param.show_directories)
+                   #pn.widgets.MultiChoice.from_param(self.param.columns),
+                   #pn.widgets.MultiChoice.from_param(self.param.extensions),
+                   #pn.widgets.Checkbox.from_param(self.param.show_directories),
+                   pn.widgets.Checkbox.from_param(self.param.show_filters),
+                   self.make_widgetbox
                   ),
             pn.widgets.Tabulator(self.param.filtered_data, height=350, pagination=None, show_index=False, selectable=True, disabled=True),
-            self.number_of_rows
+            self.number_of_rows,
+            #self.make_widgetbox
         )
