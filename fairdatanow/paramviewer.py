@@ -52,7 +52,7 @@ class DataViewer(Viewer):
     
     @param.depends("filtered_data")
     def number_of_rows(self):
-        return f"Rows: {len(self.filtered_data)}/{len(self.data)} Filesize: {naturalsize(self.bytes_amount, True)}"
+        return f"Showing {len(self.filtered_data)} out of {len(self.data)} rows | Total size: {naturalsize(self.bytes_amount, True)}"
 
     @param.depends("show_filters")
     def make_widgetbox(self):
@@ -69,13 +69,9 @@ class DataViewer(Viewer):
     def __panel__(self):
         return pn.Column(
             pn.Row(pn.widgets.TextInput.from_param(self.param.search), 
-                   #pn.widgets.MultiChoice.from_param(self.param.columns),
-                   #pn.widgets.MultiChoice.from_param(self.param.extensions),
-                   #pn.widgets.Checkbox.from_param(self.param.show_directories),
                    pn.widgets.Checkbox.from_param(self.param.show_filters),
                    self.make_widgetbox
                   ),
             pn.widgets.Tabulator(self.param.filtered_data, height=350, pagination=None, show_index=False, selectable=True, disabled=True),
-            self.number_of_rows,
-            #self.make_widgetbox
+            self.number_of_rows
         )
