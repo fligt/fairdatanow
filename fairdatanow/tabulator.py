@@ -161,8 +161,8 @@ class RemoteData2(object):
                         
                 # download from nextcloud 
                 if not is_similar: 
-                    print(f'[{i+1}/{n_files}] Timestamps do no match: {remote_modified_epoch_time} vs {local_modified_epoch_time}', end='\r')
-                    print(f'[{i+1}/{n_files}] Downloading to: {local_path}                                                       ' , end='\r')
+                    print(f'[{i}/{n_files - 1}] Timestamps do no match: {remote_modified_epoch_time} vs {local_modified_epoch_time}', end='\r')
+                    print(f'[{i}/{n_files - 1}] Downloading to: {local_path}                                                       ' , end='\r')
                       
                     # write to cache 
                     with open(local_path, 'bw') as fh: 
