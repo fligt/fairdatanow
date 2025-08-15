@@ -21,7 +21,6 @@ pn.extension("tabulator")
 
 # %% ../notebooks/10_exploring-your-remote-data-in-breez.ipynb 12
 class DataViewer(Viewer):
-
     
     # DataFrames
     data = param.DataFrame()
@@ -183,5 +182,5 @@ class DataViewer(Viewer):
             self.number_of_rows
         ) 
 
-    def __doc__(self): 
-        return '''DataViewer class'''
+
+DataViewer.__doc__ = 'Hoi'
