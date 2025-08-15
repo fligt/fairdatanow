@@ -21,8 +21,7 @@ pn.extension("tabulator")
 
 # %% ../notebooks/10_exploring-your-remote-data-in-breez.ipynb 12
 class DataViewer(Viewer):
-    '''Explore (y)our Nextcloud project data files.
-    '''
+    'Explore (y)our Nextcloud project data files.'
     
     # DataFrames
     data = param.DataFrame()
@@ -40,8 +39,7 @@ class DataViewer(Viewer):
     nc_py_api.options.NPA_NC_CERT = False 
 
     def __init__(self, configuration, subdir=None, **params):
-        '''Initalize a DataViewer instance. 
-        '''
+        'Initalize a DataViewer instance.'
         
         super().__init__(**params)
         self.nc = self._create_connector(configuration)
