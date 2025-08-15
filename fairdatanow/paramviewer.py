@@ -211,5 +211,5 @@ class DataViewer(Viewer):
             self.number_of_rows
         )
 
-
-DataViewer.__doc__ = 'Hoi'
+# dirty hack to avoid nbdev + panel docstring problems 
+DataViewer.__doc__ = 'Create connection with a Nextcloud server and list the contents of a folder.'
