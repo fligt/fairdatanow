@@ -147,7 +147,7 @@ class DataViewer(Viewer):
         # set the base df for readability and a non-watched variable
         df = self.data
         # search the dataframe in column path if it contains the search string
-        df = df[df["path"].str.contains(self.search)]
+        df = df[df["path"].str.lower().str.contains(self.search.lower())]
         # filter to only include the extensions that are selected
         if self.extensions:
             df = df[df["ext"].isin(self.extensions)]
