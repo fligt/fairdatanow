@@ -18,10 +18,8 @@ explore them and create visualizations.
 
 Under the hood the `fairdatanow` makes use of the Nextcloud Python
 Framework [nc-py-api](https://pypi.org/project/nc-py-api) for
-communication with the cloud server, and the powerful Python packages
-[polars](https://pypi.org/project/polars/),
-[itables](https://pypi.org/project/itables/) and
-[anywidget](https://pypi.org/project/anywidget/) and for creating
+communication with the cloud server, and the powerful
+[holoviz](https://holoviz.org) Python packages and for creating
 interactive tables.
 
 Although the package is still **under construction** it is already
