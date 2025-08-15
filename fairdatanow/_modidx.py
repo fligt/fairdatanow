@@ -26,4 +26,6 @@ d = { 'settings': { 'branch': 'master',
                                          'fairdatanow.paramviewer.DataViewer.make_widgetbox': ( 'exploring-your-remote-data-in-breez.html#dataviewer.make_widgetbox',
                                                                                                 'fairdatanow/paramviewer.py'),
                                          'fairdatanow.paramviewer.DataViewer.number_of_rows': ( 'exploring-your-remote-data-in-breez.html#dataviewer.number_of_rows',
-                                                                                                'fairdatanow/paramviewer.py')}}}
+                                                                                                'fairdatanow/paramviewer.py'),
+                                         'fairdatanow.paramviewer.to_iframe': ( 'exploring-your-remote-data-in-breez.html#to_iframe',
+                                                                                'fairdatanow/paramviewer.py')}}}
