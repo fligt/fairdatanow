@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['DataViewer']
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breez.ipynb 11
+# %% ../notebooks/10_exploring-your-remote-data-in-breez.ipynb 13
 import panel as pn
 import param
 import pandas as pd
@@ -19,21 +19,25 @@ import time
 
 pn.extension("tabulator")
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breez.ipynb 12
+# %% ../notebooks/10_exploring-your-remote-data-in-breez.ipynb 14
 class DataViewer(Viewer):
     
     # DataFrames
     data = param.DataFrame()
-    filtered_data = param.DataFrame()
+    filtered_data = param.DataFrame() 
+    
     # list filters
     columns = param.ListSelector(default=["path", "size", "modified"])
     extensions = param.ListSelector(default=[])
+    
     # typed filters
-    search = param.String(default="xray")
-    bytes_amount = param.Integer()
+    search = param.String(default="")
     show_directories = param.Boolean(default=False)
     show_filters = param.Boolean(default=False)
-
+    
+    # param attributes 
+    bytes_amount = param.Integer()
+    
     #non param attributes
     nc_py_api.options.NPA_NC_CERT = False 
 
@@ -159,13 +163,31 @@ class DataViewer(Viewer):
     def number_of_rows(self):
         return f"Showing {len(self.filtered_data)} out of {len(self.data)} rows | Total size: {naturalsize(self.bytes_amount, True)}"
 
+    def export_filters(self):
+        return {"columns" : self.columns,
+                "extensions" : self.extensions,
+                "search" : self.search,
+                "show_directories" : self.show_directories,
+                "show_filters" : self.show_filters
+                }
+        
+    def clear_filters(self, event):
+        self.columns = ["path", "size", "modified"]
+        self.extensions = []
+        self.search = ""
+        self.show_directories = True
+        self.show_filters = True
+
     @param.depends("show_filters")
     def make_widgetbox(self):
         if self.show_filters:
+            button = pn.widgets.Button(name='Clear filters', button_type='primary')
+            button.on_click(self.clear_filters)
             self.filter_menu = pn.WidgetBox('# Filters',
                                             pn.widgets.MultiChoice.from_param(self.param.columns),
                                             pn.widgets.MultiChoice.from_param(self.param.extensions),
-                                            pn.widgets.Checkbox.from_param(self.param.show_directories)
+                                            pn.widgets.Checkbox.from_param(self.param.show_directories),
+                                            button
                                            )
             return self.filter_menu
         self.filter_menu = None
@@ -180,7 +202,7 @@ class DataViewer(Viewer):
                   ),
             self._file_table,
             self.number_of_rows
-        ) 
+        )
 
 
 DataViewer.__doc__ = 'Hoi'
