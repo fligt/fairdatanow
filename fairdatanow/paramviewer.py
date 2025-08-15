@@ -34,6 +34,7 @@ class DataViewer(Viewer):
     search = param.String(default="")
     show_directories = param.Boolean(default=False)
     show_filters = param.Boolean(default=False)
+    use_regex = param.Boolean(default=False)
     
     # param attributes 
     bytes_amount = param.Integer()
@@ -49,7 +50,7 @@ class DataViewer(Viewer):
         # load all param attributes where necessary
         self.data = self._load_dataframe(subdir)
         self.param.columns.objects = self.data.columns.to_list()
-        self.param.extensions.objects = self.data['ext'].unique()
+        self.param.extensions.objects = sorted(self.data['ext'].unique())
 
     def _create_connector(self, configuration):
         # parse configuration 
@@ -142,12 +143,15 @@ class DataViewer(Viewer):
 
         return local_path_list
     
-    @param.depends("data", "columns", "search", "extensions", "show_directories", watch=True)
+    @param.depends("data", "columns", "search", "extensions", "show_directories", "use_regex", watch=True)
     def _update_filtered_data(self):
         # set the base df for readability and a non-watched variable
         df = self.data
         # search the dataframe in column path if it contains the search string
-        df = df[df["path"].str.lower().str.contains(self.search.lower())]
+        if self.use_regex: 
+            df = df[df['path'].str.match(self.search)]    
+        else: 
+            df = df[df["path"].str.lower().str.contains(self.search.lower())]
         # filter to only include the extensions that are selected
         if self.extensions:
             df = df[df["ext"].isin(self.extensions)]
@@ -168,7 +172,8 @@ class DataViewer(Viewer):
                 "extensions" : self.extensions,
                 "search" : self.search,
                 "show_directories" : self.show_directories,
-                "show_filters" : self.show_filters
+                "show_filters" : self.show_filters, 
+                "use_regex" : self.use_regex
                 }
         
     def clear_filters(self, event):
@@ -177,6 +182,7 @@ class DataViewer(Viewer):
         self.search = ""
         self.show_directories = True
         self.show_filters = True
+        self.use_regex = False 
 
     @param.depends("show_filters")
     def make_widgetbox(self):
@@ -197,6 +203,7 @@ class DataViewer(Viewer):
         self._file_table = pn.widgets.Tabulator(self.param.filtered_data, height=350, pagination=None, show_index=False, selectable=True, disabled=True)
         return pn.Column(
             pn.Row(pn.widgets.TextInput.from_param(self.param.search), 
+                   pn.widgets.Checkbox.from_param(self.param.use_regex), 
                    pn.widgets.Checkbox.from_param(self.param.show_filters),
                    self.make_widgetbox
                   ),
