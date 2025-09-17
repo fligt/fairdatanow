@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['to_iframe', 'DataViewer']
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 17
+# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 18
 import panel as pn
 import param
 import pandas as pd
@@ -21,26 +21,25 @@ from IPython.display import Markdown
 
 pn.extension("tabulator")
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 18
-def to_iframe(obj, html_file, height='500px'): 
-    '''Save panel-like object  as full HTML page `html_file` in *_iframes* subfolder. 
-
-    Returns: `iframe` 
+# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 19
+def to_iframe(obj, html_filename, height='500px'): 
+    '''Save panel-like object  as full HTML page `html_filename` in notefolder.  
     
     In this way it should be possible to preserve rich interactive visualizations directly in web pages.
 
     See: https://panel.holoviz.org/reference/panes/HTML.html#html-documents  
     '''
     
-    # Create iframes subfolder 
+    # Detect notebooks folder
     notebooks_dir = os.path.dirname(ipynb_path.get())
-    iframes_dir = os.path.join(notebooks_dir, '_iframes')
-    os.makedirs(iframes_dir, exist_ok=True)
     
-    # Save the plot as html file to iframes subfolder 
-    html_path = os.path.join(iframes_dir, html_file)
+    # Save the plot as html file to notebooks folder 
+    # this is the only way I found to let quarto 
+    html_path = os.path.join(notebooks_dir, html_filename)
     
-    pn.panel(obj).save(html_path)
+    pn.panel(obj).save(html_path) 
+
+    print(f'Saved file table as: {html_filename}')
 
 
 
