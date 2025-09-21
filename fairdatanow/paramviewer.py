@@ -110,13 +110,15 @@ class DataViewer(Viewer):
         
         remote_data = self.data.iloc[self._file_table.selected_dataframe.index.tolist()]
         
-        self._download(remote_data, cache_dir)
+        return self._download(remote_data, cache_dir)
         
     def download_filtered(self, cache_dir=None):
         
-        self._download(self.filtered_data, cache_dir)
+        remote_data = self.data.iloc[self.filtered_data.index.tolist()]
+        
+        return self._download(remote_data, cache_dir)
 
-    def _download(self, target_df, cache_dir=None):
+    def _download(self, remote_data, cache_dir=None):
         # create cache path 
         if cache_dir is None: 
             cache_path = Path.home().joinpath('.cache', 'fairdatanow')
