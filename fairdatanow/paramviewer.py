@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['to_iframe', 'DataViewer']
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 18
+# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 19
 import panel as pn
 import param
 import pandas as pd
@@ -21,7 +21,7 @@ from IPython.display import Markdown
 
 pn.extension("tabulator")
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 19
+# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 20
 def to_iframe(obj, html_filename, height='500px'): 
     '''Save panel-like object  as full HTML page `html_filename` in notefolder.  
     
@@ -108,6 +108,17 @@ class DataViewer(Viewer):
         
         A custom `cache_dir` can be specified. '''
         
+        remote_data = self.data.iloc[self._file_table.selected_dataframe.index.tolist()]
+        
+        return self._download(remote_data, cache_dir)
+        
+    def download_filtered(self, cache_dir=None):
+        
+        remote_data = self.data.iloc[self.filtered_data.index.tolist()]
+        
+        return self._download(remote_data, cache_dir)
+
+    def _download(self, remote_data, cache_dir=None):
         # create cache path 
         if cache_dir is None: 
             cache_path = Path.home().joinpath('.cache', 'fairdatanow')
@@ -115,9 +126,7 @@ class DataViewer(Viewer):
             cache_path = Path.home().joinpath('.cache', cache_dir)
     
         os.makedirs(cache_path, exist_ok=True)
-
-        remote_data = self.data.iloc[self._file_table.selected_dataframe.index.tolist()]
-
+        
         # obtain remote paths and remote timestamps 
         local_path_list = []
        
