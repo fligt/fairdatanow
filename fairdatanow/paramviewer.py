@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['to_iframe', 'DataViewer']
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 19
+# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 23
 import panel as pn
 import param
 import pandas as pd
@@ -19,9 +19,9 @@ import time
 import ipynb_path 
 from IPython.display import Markdown
 
+# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 24
 pn.extension("tabulator")
 
-# %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb 20
 def to_iframe(obj, html_filename, height='500px'): 
     '''Save panel-like object  as full HTML page `html_filename` in notefolder.  
     
