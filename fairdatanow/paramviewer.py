@@ -65,7 +65,7 @@ class DataViewer(Viewer):
     #non param attributes
     nc_py_api.options.NPA_NC_CERT = False 
 
-    def __init__(self, configuration, subdir=None, verify=False, **params):
+    def __init__(self, configuration, subdir=None, verify=True, **params):
         'Initalize a DataViewer instance.'
         super().__init__(**params)
         nc_py_api.options.NPA_NC_CERT = verify
