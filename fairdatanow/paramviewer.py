@@ -254,7 +254,7 @@ class DataViewer(Viewer):
         df = self.data
         # search the dataframe in column path if it contains the search string
         if self.use_regex: 
-            df = df[df['path'].str.match(self.search)]    
+            df = df[df['path'].str.match(self.search, flags=re.IGNORECASE)]    
         else: 
             df = df[df["path"].str.lower().str.contains(self.search.lower())]
         # filter to only include the extensions that are selected
