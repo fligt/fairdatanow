@@ -1,0 +1,7 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_getting-started.ipynb
+      - 10_exploring-your-remote-data-in-breeze.ipynb
+      - 20_an-image-processing-example.ipynb
