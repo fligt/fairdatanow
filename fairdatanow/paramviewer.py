@@ -59,7 +59,7 @@ def save_login(url, user, password, sep='\t'):
         print(f'Did not save login due to incorrect credentials for nextcloud server: {nextcloud_url}')  
     
 
-def login(url, sep='\t'): 
+def login(url, sep='\t', verbose=True): 
     '''Load user name name and password configuration from keyring. '''
     
     # split url 
@@ -86,7 +86,8 @@ def login(url, sep='\t'):
     assert test_ok, 'Login failed. Are your saved name and password correct?' 
 
     # all tests are ok, so return configuration 
-    print('Connection with nextcloud server is ok.')
+    if verbose: 
+        print('Connection with nextcloud server is ok.')
 
     login_configuration = {'url': url, 'user': user, 'password': password} 
     
@@ -176,22 +177,22 @@ class DataViewer(Viewer):
         
         return pd.DataFrame(data)
        
-    def download_selected(self, cache_dir=None):
+    def download_selected(self, cache_dir=None, verbose=True):
         '''Download selected files (blue rows) from `table` to default local cache directory. 
         
         A custom `cache_dir` can be specified. '''
         
         remote_data = self.data.iloc[self._file_table.selected_dataframe.index.tolist()]
         
-        return self._download(remote_data, cache_dir)
+        return self._download(remote_data, cache_dir, verbose=verbose)
         
-    def download_filtered(self, cache_dir=None):
+    def download_filtered(self, cache_dir=None, verbose=True):
         
         remote_data = self.data.iloc[self.filtered_data.index.tolist()]
         
-        return self._download(remote_data, cache_dir)
+        return self._download(remote_data, cache_dir, verbose=verbose)
 
-    def _download(self, remote_data, cache_dir=None):
+    def _download(self, remote_data, cache_dir=None, verbose=True):
         # create cache path 
         if cache_dir is None: 
             cache_path = Path.home().joinpath('.cache', 'fairdatanow')
@@ -243,8 +244,9 @@ class DataViewer(Viewer):
                     # adjust last modified timestamp 
                     now = int(time.time())
                     os.utime(local_path, (now, remote_modified_epoch_time)) 
-                    
-        print(f"Ready with downloading {len(remote_data)} selected remote files to local cache: {cache_path}                                                                      ")
+
+        if verbose: 
+            print(f"Ready with downloading {len(remote_data)} selected remote files to local cache: {cache_path}                                                                      ")
 
         return local_path_list
     
