@@ -22,7 +22,7 @@ from IPython.display import Markdown
 
 # %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb #7946b6be-6a9d-4b48-a235-6ed858b292ba
 def filters(search='', use_regex=False, extensions=[], show_directories=False, show_filters=True, columns=['path', 'size', 'modified', 'ext']): 
-    '''Utility function to easily adapt a default file filter dictionary based on a combination of search criteria.''' 
+    '''Utility function to easily adapt a default file filter dictionary based on a combination of search criteria!''' 
 
     filter_dict = dict(search=search, use_regex=use_regex, extensions=extensions, show_directories=show_directories, show_filters=show_filters, columns=columns) 
 
@@ -51,7 +51,7 @@ def save_login(url, user, password, sep='\t'):
     if test_ok:  
         # save 
         combi = f'{user}{sep}{password}' 
-        keyring.set_password(nextcloud_url, '', combi) 
+        keyring.set_password(nextcloud_url, 'X', combi) # default keyring username is 'X'
         print(f'Saved user name and password for: {nextcloud_url}')
 
     if not test_ok: 
@@ -71,7 +71,7 @@ def login(url, sep='\t', verbose=True):
     nextcloud_url, folder = m.groups() 
 
     # retrieve actual user + password combination from keyring 
-    combi = keyring.get_password(nextcloud_url, '')
+    combi = keyring.get_password(nextcloud_url, 'X') # default keyring username is 'X'  
     assert combi, f'Did not find user name and password for nextcloud server: {nextcloud_url}. Did you forget to use `save_login()` to store your credentials?'  
     user, password = re.split(sep, combi) 
     
