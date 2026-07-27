@@ -21,6 +21,9 @@ import ipynb_path
 from IPython.display import Markdown
 
 # %% ../notebooks/10_exploring-your-remote-data-in-breeze.ipynb #7946b6be-6a9d-4b48-a235-6ed858b292ba
+# check server certificate by default 
+nc_py_api.options.NPA_NC_CERT = True 
+
 def filters(search='', use_regex=False, extensions=[], show_directories=False, show_filters=True, columns=['path', 'size', 'modified', 'ext']): 
     '''Utility function to easily adapt a default file filter dictionary based on a combination of search criteria!''' 
 
@@ -137,7 +140,7 @@ class DataViewer(Viewer):
     bytes_amount = param.Integer()
     
     #non param attributes
-    nc_py_api.options.NPA_NC_CERT = False 
+    nc_py_api.options.NPA_NC_CERT = True 
 
     def __init__(self, configuration, subdir=None, verify=True, **params):
         'Initalize a DataViewer instance.'
