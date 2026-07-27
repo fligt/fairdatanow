@@ -31,7 +31,7 @@ def data_now(url, toml_txt, verbose=False):
             # download files to fairdatanow cache and return local file paths 
             files = dv.download_filtered(verbose=verbose)
             files_dict[table][k] = files
-        print(f"Found {len(files_dict[table])} {table} files.")
+        print(f"Found {len(files_dict[table])} files in table: ['{table}'].")
     print("Ready!")
     return files_dict
            
