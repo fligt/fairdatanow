@@ -6,10 +6,13 @@
 __all__ = ['data_now']
 
 # %% ../notebooks/30_annotating-your-shared-data-with-TOML.ipynb #ff93b9ec-f772-46d7-8f7f-87a9c95fc779
-from . import DataViewer, login, filters 
+from tqdm.notebook import tqdm_notebook
 import tomlkit
+import fairdatanow
+from . import DataViewer, login, filters
+from humanize import naturalsize
 
-# %% ../notebooks/30_annotating-your-shared-data-with-TOML.ipynb #9c391604-e0de-4d4c-a255-645d69feb4b7
+# %% ../notebooks/30_annotating-your-shared-data-with-TOML.ipynb #72ca84ac-78a0-4814-90de-009a3772e4f0
 def data_now(url, toml_txt, verbose=False): 
     '''Download all the data present in the data table in your TOML file.'''
     
@@ -20,19 +23,40 @@ def data_now(url, toml_txt, verbose=False):
     tablelist = list(data_table.keys())
 
     dv = DataViewer(login(url, verbose=verbose), **filters(search='', use_regex=True, extensions=[]))
-    files_dict = {}
-
-    for table in tablelist: 
-        files_dict[table] = {}
-        if verbose: 
-            print(f'\nSyncing files to cache for the following {n_keys} file groups:')
-        for k in data_table[table]:
-            dv.search = data_table[table][k] 
-            # download files to fairdatanow cache and return local file paths 
-            files = dv.download_filtered(verbose=verbose)
-            files_dict[table][k] = files
-        print(f"Found {len(files_dict[table])} files in table: ['{table}'].")
-    print("Ready!")
-    return files_dict
-           
     
+    _, bytes_to_download = _loop_data(tablelist, data_table, dv, download=False, bytes_to_download=0)
+
+    files_dict, _ = _loop_data(tablelist, data_table, dv, download=True, bytes_to_download=bytes_to_download)
+    
+    return files_dict
+
+def _loop_data(tablelist:list, data_table:tomlkit.TOMLDocument, dv:fairdatanow.DataViewer, download:bool, bytes_to_download:int,verbose:bool=False):
+    files_dict = {}
+    total_bytes = 0
+
+    with tqdm_notebook(
+        total=bytes_to_download, 
+        unit='B', 
+        unit_scale=True, 
+        unit_divisor=1024, 
+        desc="Downloading", 
+        disable=not download
+    ) as pbar:
+        for table in tablelist:
+
+            files_dict[table] = {}
+
+            for k in data_table[table]:
+
+                dv.search = data_table[table][k] 
+
+                total_bytes += dv.bytes_amount
+
+                if download:
+                    # download files to fairdatanow cache and return local file paths 
+                    files = dv.download_filtered(verbose=verbose)
+                    files_dict[table][k] = files
+                    pbar.update(dv.bytes_amount)
+            if download:
+                print(f"Found {len(files_dict[table])} files in table: ['{table}']")
+    return files_dict, total_bytes
