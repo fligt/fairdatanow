@@ -1,0 +1,235 @@
+---
+skip_exec: true
+title: Annotating your shared data with TOML
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.19.6
+  kernelspec:
+    display_name: .venv
+    language: python
+    name: python3
+---
+
+
+> Fixing the missing metadata syndrome with .toml files 
+
+
+If your research team starts to turn every stone very soon you will be facing a large pile of files. How to make sense as team of thousands of shared data files in your cloud storage with new uploads every week? In an ideal world we would all agree on a well defined folder structure. We would apply perfectly clear file naming conventions. And we would provide sufficient metadata with every file. All in order to help the colleagues in our team to make sense of the data collectively. In our heritage science lab with we do not have that luxury. As an interdisciplinary team working with primitive software applications, severely limited time budgets and high costs of artwork logistics it is difficult enough just get to get the measurements done and uploaded to the pile of files
+on our Nextcloud server. This is what I call the **Missing Metadata Syndrome.**       
+
+This implies that data sharing is not smooth at all. As a consequence data analysis is highly inefficient and it is hard to share insights that can be derived from the data within the team. In order to fix this problem we should stop dreaming about metadata magically appearing. Instead we should start to annotate our data. This means that we should discover and explore specific portions of the data to answer targeted questions and make annotations that help us to remember how to find back requisite data files. 
+
+The best way to do this is to store these annotations in simple text files that can be read both by humans and computers. The most suitable format for doing this is the so called [TOML file format](https://toml.io/en/). 
+
+## Tom's Obvious Minimal Language 
+
+Ok, let's see how we can build a .toml file to download all files needed to answer a simple question. On which locations within our ten World Museum Japanse prints did Gauthier and Tessa measure an XRF spectrum and what do these spectra show? 
+
+```{python}
+from fairdatanow import DataViewer, login, filters, data_now
+import os 
+import re 
+import toml 
+
+import holoviews as hv 
+from holoviews import RGB, opts 
+from holoviews.operation.datashader import rasterize
+import panel as pn 
+```
+
+```{python}
+hv.extension('bokeh') 
+opts.defaults(opts.RGB(aspect='equal', frame_width=300, shared_axes=False)) 
+```
+
+```{python}
+toml_txt = '''
+# On which locations within our ten World Museum Japanse prints did Gauthier and Tessa measure an XRF spectrum? 
+# And what do these spectra show?  
+
+# Measurements have been done on a selection of 10 prints that are present in our lab 
+# here are the 10 object numbers 
+
+prints_in_Amsterdam = [
+ 'RV-1-4468-544',
+ 'RV-1-4469-484',
+ 'RV-1-4469-58',
+ 'RV-1-4469-x6',
+ 'RV-1-4469Q',
+ 'RV-1-4470-12',
+ 'RV-1-4470-27',
+ 'RV-360-2345g',
+ 'RV-360-2359-2',
+ 'RV-360-6886']
+
+[nc_spx]
+# these are regexes that download all .spx files per object number  
+
+RV-1-4468-544 = ".*XRF.*RV-1-4468-544.*[.]spx"
+RV-1-4469-484 = ".*XRF.*RV-1-4469-484.*[.]spx"
+RV-1-4469-58 = ".*XRF.*RV-1-4469-58.*[.]spx"
+RV-1-4469-x6 = ".*XRF.*RV-1-4469-x6.*[.]spx"
+RV-1-4469Q = ".*XRF.*RV-1-4469Q.*[.]spx"       # duplicate so no XRF spectra 
+RV-1-4470-12 = ".*XRF.*RV-1-4470-12.*[.]spx"
+RV-1-4470-27 = ".*XRF.*RV-1-4470-27.*[.]spx"
+RV-360-2345g = ".*XRF.*RV-360-2345g.*[.]spx"
+RV-360-2359-2 = ".*XRF.*RV-360-2359-2.*[.]spx"
+RV-360-6886 = ".*XRF.*RV-360-6886.*[.]spx"
+
+[nc_jpg]
+# these are regexes that download all .jpg files per object number  
+
+RV-1-4468-544 = ".*XRF.*RV-1-4468-544.*[.]jpg"
+RV-1-4469-484 = ".*XRF.*RV-1-4469-484.*[.]jpg"
+RV-1-4469-58 = ".*XRF.*RV-1-4469-58.*[.]jpg"
+RV-1-4469-x6 = ".*XRF.*RV-1-4469-x6.*[.]jpg"
+RV-1-4469Q = ".*XRF.*RV-1-4469Q.*[.]jpg" # duplicate so no jpg's for point locations 
+RV-1-4470-12 = ".*XRF.*RV-1-4470-12.*[.]jpg"
+RV-1-4470-27 = ".*XRF.*RV-1-4470-27.*[.]jpg"
+RV-360-2345g = ".*XRF.*RV-360-2345g.*[.]jpg"
+RV-360-2359-2 = ".*XRF.*RV-360-2359-2.*[.]jpg"
+RV-360-6886 = ".*XRF.*RV-360-6886.*[.]jpg"
+
+[nc_tifs] 
+# regexes for the tifs 
+RV-1-4468-544 = ".*akama.*RV-1-4468-544[.]tif"
+RV-1-4469-484 = ".*akama.*RV-1-4469-484[.]tif"
+RV-1-4469-58 = ".*akama.*RV-1-4469-58[.]tif"
+RV-1-4469-x6 = ".*akama.*RV-1-4469-x6[.]tif"
+RV-1-4469Q = ".*akama.*RV-1-4469Q[.]tif"
+RV-1-4470-12 = ".*akama.*RV-1-4470-12[.]tif"
+RV-1-4470-27 = ".*akama.*1-4470-27[.]tif"      # TIF NAME WITHOUT RV prefix!  
+RV-360-2345g = ".*akama.*RV-360-2345-?g[.]tif"
+RV-360-2359-2 = ".*akama.*RV-360-2359-2[.]tif"
+RV-360-6886 = ".*akama.*RV-360-6886[.]tif"
+
+'''
+```
+
+Simple for loop to create additional specific file patterns. 
+
+```{python}
+toml_dict = toml.loads(toml_txt)
+object_nums = sorted(toml_dict['prints_in_Amsterdam'])
+```
+
+```{python}
+for num in object_nums: 
+    print(f'{num} = ".*XRF.*{num}.*[.]jpg"')
+```
+
+```{python}
+toml_dict = toml.loads(toml_txt)
+object_nums = sorted(toml_dict['prints_in_Amsterdam'])
+```
+
+```{python}
+url = 'https://laboppad.nl/ukiyo-e-world' 
+spx_files_dict = data_now(url, toml_txt, nc_key='nc_spx', verbose=False)
+jpg_files_dict = data_now(url, toml_txt, nc_key='nc_jpg', verbose=False)
+tif_files_dict = data_now(url, toml_txt, nc_key='nc_tifs', verbose=False)
+```
+
+```{python}
+rgb_views = [rasterize(RGB.load_image(tif_files_dict[num][0]).opts(title=num)) for num in object_nums] 
+layout = hv.Layout(rgb_views).cols(5)
+```
+
+```{python}
+layout
+```
+
+We can now try to enrich our toml file with other data... 
+
+## FUNCTIONS
+
+```{python}
+#| '0': e
+#| '1': x
+#| '2': p
+#| '3': o
+#| '4': r
+#| '5': t
+from fairdatanow import DataViewer, login, filters 
+import toml
+```
+
+```{python}
+#| '0': e
+#| '1': x
+#| '2': p
+#| '3': o
+#| '4': r
+#| '5': t
+class ReadTOML(): 
+
+    def __init__(self, url, toml_search, use_regex=False, nc_key='nc', verbose=False): 
+        '''From nextcloud folder at `url` download and parse toml file matching `toml_search` string.'''
+        
+        # download the toml file 
+        dv = DataViewer(login(url, verbose=False), **filters(search=toml_search, use_regex=use_regex, extensions=['.toml']))
+        files = dv.download_filtered(verbose=False) 
+    
+        # check if we find only one unique matching toml file  
+        n_files = len(files)
+        #assert (n_files == 1), f'Found {n_files} .toml files in nextcloud folder {url} matching {search}: \n {files}' 
+        assert n_files == 1, f'Found {n_files} .toml files in nextcloud folder {url} matching "{toml_search}": \n {files}' 
+
+        # read and parse toml file 
+        self.toml_file = files[0]
+        self.toml_dict = toml.load(self.toml_file)  
+        
+        with open(self.toml_file, 'r') as fh: 
+            self.toml_txt = fh.read()
+        if verbose:
+            print(f'Here is the content of {toml_file}: \n')  
+            print(self.toml_txt)
+
+        # create dictionary for to nextcloud [nc] regular expression file patterns   
+        if nc_key is not None: 
+            self.toml_nc_dict = self.toml_dict[nc_key] 
+        else: 
+            self.toml_nc_dict = self.toml_dict 
+
+            
+def data_now(url, toml_txt, nc_key='nc', verbose=True): 
+    '''Download complete dataset as described in your toml file matching `toml_txt` string with `nc_key` to your local computer.'''
+    
+    # parse toml text string 
+    
+    toml_dict = toml.loads(toml_txt) 
+    toml_nc_dict = toml_dict[nc_key] 
+
+    # instantiate dataviewer now with use_regex=True
+    dv = DataViewer(login(url, verbose=verbose), **filters(search='', use_regex=True, extensions=[]))
+
+    # iterate over keys and search for regular expression file patterns 
+    key_list = list(toml_nc_dict.keys()) 
+    n_keys = len(key_list)  
+
+    files_dict = {}
+
+    if verbose: 
+        print(f'\nSyncing files to cache for the following {n_keys} file groups:') 
+        
+    for i, k in enumerate(key_list): 
+        if verbose: 
+            print(f"[{i}] '{k}'                  ") 
+        
+        # update param search string 
+        dv.search = toml_nc_dict[k] 
+
+        # download files to fairdatanow cache and return local file paths 
+        files = dv.download_filtered(verbose=verbose) 
+
+        # add file paths to dictionary 
+        files_dict[k] = files 
+
+    print('Ready!')
+
+    return files_dict 
+```

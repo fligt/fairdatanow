@@ -1,9 +1,0 @@
-project:
-  output-dir: docs
-
-website:
-  title: "fairdatanow"
-  site-url: "https://fligt.github.io/fairdatanow"
-  description: "Experimental Python package to support working with data from (y)our Nextcloud server"
-  repo-branch: master
-  repo-url: "https://github.com/fligt/fairdatanow"

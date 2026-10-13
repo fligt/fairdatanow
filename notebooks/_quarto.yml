@@ -1,18 +1,15 @@
 project:
   type: website
+  output-dir: "../docs/"
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: false
-    page-layout: full
+    theme: default
+    css: custom.css
 
 website:
+  title: "fairdatanow"
   page-navigation: true
-  twitter-card: false
-  open-graph: true
-  repo-actions: [issue]
   navbar:
     background: primary
     search: true
@@ -21,6 +18,5 @@ website:
         href: "https://github.com/fligt/fairdatanow"
   sidebar:
     style: floating
-  page-footer: "2025 Rijkserfgoedlaboratorium Amsterdam | Made with nbdev"
-
-metadata-files: [nbdev.yml, sidebar.yml]
+    contents: auto
+  page-footer: "2026 Rijkserfgoedlaboratorium Amsterdam"
