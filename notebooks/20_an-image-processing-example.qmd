@@ -14,14 +14,6 @@ jupyter:
     name: python3
 ---
 
-
-
-
-> One step at a time 
-
-
-In the previous section we found and downloaded 28 tif files that we need to inspect and subsequently process. In this example for every imaged page of the falnama manuscript we need to stitch the upper and lower halves of the pages.   
-
 ```{python}
 from fairdatanow import DataViewer, filters, login
 import os 
@@ -52,6 +44,7 @@ import imageio.v3 as iio
 import holoviews as hv
 from holoviews.operation.datashader import rasterize 
 import panel as pn
+from pyvips import Image
 ```
 
 ```{python}
@@ -63,20 +56,19 @@ pn.extension(sizing_mode='stretch_width')
 ```
 
 ```{python}
-# Read the 28 tif files into arrays 
-ims = [iio.imread(im_file) for im_file in im_files] 
+# Read the 28 super large tif files into arrays with pyvips 
+ims = [Image.new_from_file(im_file).numpy() for im_file in im_files] 
 
 # Convert into holoviews images
 hv_images = [hv.Image(im) for im in ims] 
 
+
 # Rasterize to reduce size and speed up loading 
 rasterized_ims = [rasterize(hv_im, width=500, height=500) for hv_im in hv_images] 
 
+
 # Embed images in interactive viewer 
 image_panes = [pn.pane.HoloViews(raster_im.opts(xaxis=None, yaxis=None, cmap='gray', tools=['hover'], title=titles[i])) for i, raster_im in enumerate(rasterized_ims)]
-```
-
-```{python}
 # Create a grid 
 #xrays = pn.panel(pn.GridBox(*image_panes, ncols=6))
 
