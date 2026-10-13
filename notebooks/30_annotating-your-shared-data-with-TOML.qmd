@@ -148,23 +148,11 @@ We can now try to enrich our toml file with other data...
 ## FUNCTIONS
 
 ```{python}
-#| '0': e
-#| '1': x
-#| '2': p
-#| '3': o
-#| '4': r
-#| '5': t
 from fairdatanow import DataViewer, login, filters 
 import toml
 ```
 
 ```{python}
-#| '0': e
-#| '1': x
-#| '2': p
-#| '3': o
-#| '4': r
-#| '5': t
 class ReadTOML(): 
 
     def __init__(self, url, toml_search, use_regex=False, nc_key='nc', verbose=False): 

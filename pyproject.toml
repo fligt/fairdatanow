@@ -41,6 +41,7 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    "imageio>=2.38.1",
     "ipykernel>=7.4.0",
     "jupyter-bokeh>=4.1.0",
     "jupytext>=1.19.6",

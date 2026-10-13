@@ -9,7 +9,7 @@ jupyter:
       format_version: '1.0'
       jupytext_version: 1.19.6
   kernelspec:
-    display_name: python3
+    display_name: .venv
     language: python
     name: python3
 ---
@@ -23,28 +23,23 @@ jupyter:
 In the previous section we found and downloaded 28 tif files that we need to inspect and subsequently process. In this example for every imaged page of the falnama manuscript we need to stitch the upper and lower halves of the pages.   
 
 ```{python}
-from fairdatanow import DataViewer
+from fairdatanow import DataViewer, filters, login
 import os 
 import re 
 ```
 
 ```{python}
-configuration = {
-    'url': "https://laboppad.nl/falnama-project", 
-    'user':    os.getenv('NC_AUTH_USER'),
-    'password': os.getenv('NC_AUTH_PASS')
-}
+url = "https://laboppad.nl/falnama-project"
 ```
 
 ```{python}
-dv = DataViewer(configuration)
-remote_data.listdir(search_regex='edited.tif')
+dv = DataViewer(login(url), **filters(search='edited.tif', extensions=['.tif']))
 ```
 
 Let's take a look at the filenames. 
 
 ```{python}
-im_files = remote_data.download_selected()
+im_files = dv.download_filtered()
 titles = [re.sub('_Falnama.*', '', os.path.basename(f)) for f in im_files]
 ```
 
