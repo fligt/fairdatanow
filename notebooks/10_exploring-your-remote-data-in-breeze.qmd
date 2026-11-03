@@ -21,7 +21,7 @@ jupyter:
 In order to to make use of `fairdatanow`, you will need a Nextcloud server url and credentials to access a folder on a (self hosted) Nextcloud server. 
 
 ::: {.callout-tip collapse="true"}
-## Use SaveLogin()' to store your credentials, this opens a widget where you can put your login information. Import this function first using `from fairdatanow import SaveLogin`
+## Use SaveLogin()' to store your credentials
 
 You need to type your username and password only once and store them safely with the `SaveLogin()` class. Next time you access the Nextcloud server you can retrieve these credentials with the `login()` function.  In this way you avoid typing them directly in the notebook, which is not save if you need to share these notebooks with others... 
 
