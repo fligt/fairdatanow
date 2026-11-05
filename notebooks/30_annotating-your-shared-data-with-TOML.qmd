@@ -1,5 +1,4 @@
 ---
-skip_exec: true
 title: Annotating your shared data with TOML
 jupyter:
   jupytext:
@@ -9,25 +8,10 @@ jupyter:
       format_version: '1.0'
       jupytext_version: 1.19.6
   kernelspec:
-    display_name: .venv
+    display_name: Python 3 (ipykernel)
     language: python
     name: python3
 ---
-
-
-> Fixing the missing metadata syndrome with .toml files 
-
-
-If your research team starts to turn every stone very soon you will be facing a large pile of files. How to make sense as team of thousands of shared data files in your cloud storage with new uploads every week? In an ideal world we would all agree on a well defined folder structure. We would apply perfectly clear file naming conventions. And we would provide sufficient metadata with every file. All in order to help the colleagues in our team to make sense of the data collectively. In our heritage science lab with we do not have that luxury. As an interdisciplinary team working with primitive software applications, severely limited time budgets and high costs of artwork logistics it is difficult enough just get to get the measurements done and uploaded to the pile of files
-on our Nextcloud server. This is what I call the **Missing Metadata Syndrome.**       
-
-This implies that data sharing is not smooth at all. As a consequence data analysis is highly inefficient and it is hard to share insights that can be derived from the data within the team. In order to fix this problem we should stop dreaming about metadata magically appearing. Instead we should start to annotate our data. This means that we should discover and explore specific portions of the data to answer targeted questions and make annotations that help us to remember how to find back requisite data files. 
-
-The best way to do this is to store these annotations in simple text files that can be read both by humans and computers. The most suitable format for doing this is the so called [TOML file format](https://toml.io/en/). 
-
-## Tom's Obvious Minimal Language 
-
-Ok, let's see how we can build a .toml file to download all files needed to answer a simple question. On which locations within our ten World Museum Japanse prints did Gauthier and Tessa measure an XRF spectrum and what do these spectra show? 
 
 ```{python}
 from fairdatanow import DataViewer, login, filters, data_now
@@ -144,80 +128,3 @@ layout
 ```
 
 We can now try to enrich our toml file with other data... 
-
-## FUNCTIONS
-
-```{python}
-from fairdatanow import DataViewer, login, filters 
-import toml
-```
-
-```{python}
-class ReadTOML(): 
-
-    def __init__(self, url, toml_search, use_regex=False, nc_key='nc', verbose=False): 
-        '''From nextcloud folder at `url` download and parse toml file matching `toml_search` string.'''
-        
-        # download the toml file 
-        dv = DataViewer(login(url, verbose=False), **filters(search=toml_search, use_regex=use_regex, extensions=['.toml']))
-        files = dv.download_filtered(verbose=False) 
-    
-        # check if we find only one unique matching toml file  
-        n_files = len(files)
-        #assert (n_files == 1), f'Found {n_files} .toml files in nextcloud folder {url} matching {search}: \n {files}' 
-        assert n_files == 1, f'Found {n_files} .toml files in nextcloud folder {url} matching "{toml_search}": \n {files}' 
-
-        # read and parse toml file 
-        self.toml_file = files[0]
-        self.toml_dict = toml.load(self.toml_file)  
-        
-        with open(self.toml_file, 'r') as fh: 
-            self.toml_txt = fh.read()
-        if verbose:
-            print(f'Here is the content of {toml_file}: \n')  
-            print(self.toml_txt)
-
-        # create dictionary for to nextcloud [nc] regular expression file patterns   
-        if nc_key is not None: 
-            self.toml_nc_dict = self.toml_dict[nc_key] 
-        else: 
-            self.toml_nc_dict = self.toml_dict 
-
-            
-def data_now(url, toml_txt, nc_key='nc', verbose=True): 
-    '''Download complete dataset as described in your toml file matching `toml_txt` string with `nc_key` to your local computer.'''
-    
-    # parse toml text string 
-    
-    toml_dict = toml.loads(toml_txt) 
-    toml_nc_dict = toml_dict[nc_key] 
-
-    # instantiate dataviewer now with use_regex=True
-    dv = DataViewer(login(url, verbose=verbose), **filters(search='', use_regex=True, extensions=[]))
-
-    # iterate over keys and search for regular expression file patterns 
-    key_list = list(toml_nc_dict.keys()) 
-    n_keys = len(key_list)  
-
-    files_dict = {}
-
-    if verbose: 
-        print(f'\nSyncing files to cache for the following {n_keys} file groups:') 
-        
-    for i, k in enumerate(key_list): 
-        if verbose: 
-            print(f"[{i}] '{k}'                  ") 
-        
-        # update param search string 
-        dv.search = toml_nc_dict[k] 
-
-        # download files to fairdatanow cache and return local file paths 
-        files = dv.download_filtered(verbose=verbose) 
-
-        # add file paths to dictionary 
-        files_dict[k] = files 
-
-    print('Ready!')
-
-    return files_dict 
-```
