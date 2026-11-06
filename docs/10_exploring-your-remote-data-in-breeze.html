@@ -236,12 +236,8 @@ Use SaveLogin()’ to store your credentials
 </div>
 </div>
 <p>To get started you need to import the <code>DataViewer</code> class from the package and instantiate it with the Nextcloud <code>login()</code> and <code>**filters()</code> functions. Depending on the amount of files in the cloud storage it might take some time to build the interactive file table. In this example we want to create a table for 8118 files (and counting) from the Falnama project which takes about 13 seconds.</p>
-<div id="e4552711" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fairdatanow <span class="im">import</span> SaveLogin</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> panel <span class="im">as</span> pn</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pn.extension()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>SaveLogin()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="88e938a1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fairdatanow <span class="im">import</span> DataViewer, login, filters </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
 *[data-root-id] > * {
@@ -792,12 +788,12 @@ if (window.Jupyter !== undefined) {
 </script>
 </div>
 <div class="cell-output cell-output-display">
-<div id="17898792-06c6-44f4-9137-d0b32fd58e79">
-  <div id="df98f667-a509-43f7-87cc-e7956ac466cd" data-root-id="17898792-06c6-44f4-9137-d0b32fd58e79" style="display: contents;"></div>
+<div id="e2357771-9f0b-4d2b-87a9-f33b52789267">
+  <div id="cb32a4ee-c296-4564-aaba-8b39741f290f" data-root-id="e2357771-9f0b-4d2b-87a9-f33b52789267" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"a6f73b68-c312-469e-bbdf-d20b028452e8":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"9b9f5fbd-4d8e-4179-8b2e-2c19d7d57fff","attributes":{"notifications":{"type":"object","name":"Notifications","id":"5f2517bf-a45b-4b4b-9368-8c6b1a74a2fc"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"17898792-06c6-44f4-9137-d0b32fd58e79"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"f7eb3f44-7c99-48da-8747-319e2d9995ab","attributes":{"plot_id":"17898792-06c6-44f4-9137-d0b32fd58e79","comm_id":"05268ac9304849b98b44b02cdd4c34e7","client_comm_id":"b9bce916057f475e88944de839001325"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"a6f73b68-c312-469e-bbdf-d20b028452e8","roots":{"17898792-06c6-44f4-9137-d0b32fd58e79":"df98f667-a509-43f7-87cc-e7956ac466cd"},"root_ids":["17898792-06c6-44f4-9137-d0b32fd58e79"]}];
+  var docs_json = {"2fd8926c-a021-47ac-94bc-04f3a7d5ba43":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"212775a0-0d0f-4d33-bff6-e30231337d3b","attributes":{"notifications":{"type":"object","name":"Notifications","id":"782980d6-7fd9-4913-b341-f11ad70dd980"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"e2357771-9f0b-4d2b-87a9-f33b52789267"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"7911df39-cc5b-4043-8fcd-9509feb43976","attributes":{"plot_id":"e2357771-9f0b-4d2b-87a9-f33b52789267","comm_id":"97024968ee0743b49d092d8003172bf8","client_comm_id":"fda2c41a2e2d4f999c1297271a5dd162"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"2fd8926c-a021-47ac-94bc-04f3a7d5ba43","roots":{"e2357771-9f0b-4d2b-87a9-f33b52789267":"cb32a4ee-c296-4564-aaba-8b39741f290f"},"root_ids":["e2357771-9f0b-4d2b-87a9-f33b52789267"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -863,654 +859,27 @@ if (window.Jupyter !== undefined) {
   }
 })(window);</script>
 </div>
-<div class="cell-output cell-output-display">
-<script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
-*[data-root-id] > * {
-  box-sizing: border-box;
-  font-family: var(--jp-ui-font-family);
-  font-size: var(--jp-ui-font-size1);
-  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
-}
-
-/* Override VSCode background color */
-.cell-output-ipywidget-background:has(
-  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
-),
-.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
-  background-color: transparent !important;
-}
-</style>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/javascript">
-(function(root) {
-  function now() {
-    return new Date();
-  }
-
-  const force = false;
-  const version = '3.9.2'.replace('rc', '-rc.').replace('.dev', '-dev.');
-  const reloading = true;
-  const Bokeh = root.Bokeh;
-  const BK_RE = /^https:\/\/cdn\.bokeh\.org\/bokeh\/(release|dev)\/bokeh-/;
-  const PN_RE = /^https:\/\/cdn\.holoviz\.org\/panel\/[^/]+\/dist\/panel/i;
-
-  // Set a timeout for this load but only if we are not already initializing
-  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
-    root._bokeh_timeout = Date.now() + 5000;
-    root._bokeh_failed_load = false;
-  }
-
-  function run_callbacks() {
-    try {
-      root._bokeh_onload_callbacks.forEach(function(callback) {
-        if (callback != null)
-          callback();
-      });
-    } finally {
-      delete root._bokeh_onload_callbacks;
-    }
-    console.debug("Bokeh: all callbacks have finished");
-  }
-
-  function load_libs(css_urls, js_urls, js_modules, js_exports, Bokeh, callback) {
-    if (css_urls == null) css_urls = [];
-    if (js_urls == null) js_urls = [];
-    if (js_modules == null) js_modules = [];
-    if (js_exports == null) js_exports = {};
-
-    root._bokeh_onload_callbacks.push(callback);
-
-    if (root._bokeh_is_loading > 0) {
-      // Don't load bokeh if it is still initializing
-      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
-      return null;
-    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
-      // There is nothing to load
-      run_callbacks();
-      return null;
-    }
-
-    function on_load() {
-      root._bokeh_is_loading--;
-      if (root._bokeh_is_loading === 0) {
-        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
-        run_callbacks()
-      }
-    }
-    window._bokeh_on_load = on_load
-
-    function on_error(e) {
-      const src_el = e.srcElement
-      console.error("failed to load " + (src_el.href || src_el.src));
-    }
-
-    const skip = [];
-    if (window.requirejs) {
-      window.requirejs.config({'packages': {}, 'paths': {'tabulator': 'https://cdn.jsdelivr.net/npm/tabulator-tables@6.4.0/dist/js/tabulator.min', 'moment': 'https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min'}, 'shim': {}});
-      require(["tabulator"], function(Tabulator) {
-        window.Tabulator = Tabulator
-        on_load()
-      })
-      require(["moment"], function(moment) {
-        window.moment = moment
-        on_load()
-      })
-      root._bokeh_is_loading = css_urls.length + 2;
-    } else {
-      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
-    }
-
-    const existing_stylesheets = []
-    const links = document.getElementsByTagName('link')
-    for (let i = 0; i < links.length; i++) {
-      const link = links[i]
-      if (link.href != null) {
-        existing_stylesheets.push(link.href)
-      }
-    }
-    for (let i = 0; i < css_urls.length; i++) {
-      const url = css_urls[i];
-      const escaped = encodeURI(url)
-      if (existing_stylesheets.indexOf(escaped) !== -1) {
-        on_load()
-        continue;
-      }
-      const element = document.createElement("link");
-      element.onload = on_load;
-      element.onerror = on_error;
-      element.rel = "stylesheet";
-      element.type = "text/css";
-      element.href = url;
-      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
-      document.body.appendChild(element);
-    }    if (((window.Tabulator !== undefined) && (!(window.Tabulator instanceof HTMLElement))) || window.requirejs) {
-      var urls = ['https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/tabulator-tables@6.4.0/dist/js/tabulator.min.js'];
-      for (var i = 0; i < urls.length; i++) {
-        skip.push(encodeURI(urls[i]))
-      }
-    }    if (((window.moment !== undefined) && (!(window.moment instanceof HTMLElement))) || window.requirejs) {
-      var urls = ['https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/luxon/build/global/luxon.min.js'];
-      for (var i = 0; i < urls.length; i++) {
-        skip.push(encodeURI(urls[i]))
-      }
-    }    var existing_scripts = []
-    const scripts = document.getElementsByTagName('script')
-    for (let i = 0; i < scripts.length; i++) {
-      var script = scripts[i]
-      if (script.src != null) {
-        existing_scripts.push(script.src)
-      }
-    }
-    for (let i = 0; i < js_urls.length; i++) {
-      const url = js_urls[i];
-      const escaped = encodeURI(url)
-      const shouldSkip = skip.includes(escaped) || existing_scripts.includes(escaped)
-      const isBokehOrPanel = BK_RE.test(escaped) || PN_RE.test(escaped)
-      const missingOrBroken = Bokeh == null || Bokeh.Panel == null || (Bokeh.version != version && !Bokeh.versions?.has(version)) || Bokeh.versions?.get(version)?.Panel == null;
-      if (shouldSkip && !(isBokehOrPanel && missingOrBroken)) {
-        if (!window.requirejs) {
-          on_load();
-        }
-        continue;
-      }
-      const element = document.createElement('script');
-      element.onload = on_load;
-      element.onerror = on_error;
-      element.async = false;
-      element.src = url;
-      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
-      document.head.appendChild(element);
-    }
-    for (let i = 0; i < js_modules.length; i++) {
-      const url = js_modules[i];
-      const escaped = encodeURI(url)
-      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
-        if (!window.requirejs) {
-          on_load();
-        }
-        continue;
-      }
-      var element = document.createElement('script');
-      element.onload = on_load;
-      element.onerror = on_error;
-      element.async = false;
-      element.src = url;
-      element.type = "module";
-      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
-      document.head.appendChild(element);
-    }
-    for (const name in js_exports) {
-      const url = js_exports[name];
-      const escaped = encodeURI(url)
-      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
-        if (!window.requirejs) {
-          on_load();
-        }
-        continue;
-      }
-      var element = document.createElement('script');
-      element.onerror = on_error;
-      element.async = false;
-      element.type = "module";
-      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
-      element.textContent = `
-      import ${name} from "${url}"
-      window.${name} = ${name}
-      window._bokeh_on_load()
-      `
-      document.head.appendChild(element);
-    }
-    if (!js_urls.length && !js_modules.length) {
-      on_load()
-    }
-  };
-
-  function inject_raw_css(css) {
-    const element = document.createElement("style");
-    element.appendChild(document.createTextNode(css));
-    document.body.appendChild(element);
-  }
-
-  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/tabulator-tables@6.4.0/dist/js/tabulator.min.js", "https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/luxon/build/global/luxon.min.js"];
-  const js_modules = [];
-  const js_exports = {};
-  const css_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/tabulator-tables@6.4.0/dist/css/tabulator_simple.min.css"];
-  const inline_js = [    function(Bokeh) {
-      Bokeh.set_log_level("info");
-    },
-function(Bokeh) {} // ensure no trailing comma for IE
-  ];
-
-  function run_inline_js() {
-    if ((root.Bokeh !== undefined) || (force === true)) {
-      for (let i = 0; i < inline_js.length; i++) {
-        try {
-          inline_js[i].call(root, root.Bokeh);
-        } catch(e) {
-          if (!reloading) {
-            throw e;
-          }
-        }
-      }
-    } else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(run_inline_js, 100);
-    } else if (!root._bokeh_failed_load) {
-      console.log("Bokeh: BokehJS failed to load within specified timeout.");
-      root._bokeh_failed_load = true;
-    }
-    root._bokeh_is_initializing = false;
-  }
-
-  function load_or_wait() {
-    // Implement a backoff loop that tries to ensure we do not load multiple
-    // versions of Bokeh and its dependencies at the same time.
-    // In recent versions we use the root._bokeh_is_initializing flag
-    // to determine whether there is an ongoing attempt to initialize
-    // bokeh, however for backward compatibility we also try to ensure
-    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
-    // before older versions are fully initialized.
-    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
-      // If the timeout and bokeh was not successfully loaded we reset
-      // everything and try loading again
-      root._bokeh_timeout = Date.now() + 5000;
-      root._bokeh_is_initializing = false;
-      root._bokeh_onload_callbacks = undefined;
-      root._bokeh_is_loading = 0;
-      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
-      load_or_wait();
-    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
-      setTimeout(load_or_wait, 100);
-    } else {
-      root._bokeh_is_initializing = true;
-      root._bokeh_onload_callbacks = [];
-      const bokeh_loaded = Bokeh != null && ((Bokeh.version === version && Bokeh.Panel) || (Bokeh.versions?.has(version) && Bokeh.versions.get(version)?.Panel));
-      if (!reloading && !bokeh_loaded) {
-        if (root.Bokeh) {
-          root.Bokeh = undefined;
-        }
-        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
-      }
-      load_libs(css_urls, js_urls, js_modules, js_exports, Bokeh, function() {
-        console.debug("Bokeh: BokehJS plotting callback run at", now());
-        run_inline_js();
-        if (Bokeh != undefined && !reloading) {
-          const NewBokeh = root.Bokeh;
-          if (Bokeh.versions === undefined) {
-            Bokeh.versions = new Map();
-          }
-          if (NewBokeh.version !== Bokeh.version) {
-            Bokeh[NewBokeh.version] = NewBokeh;
-            Bokeh.versions.set(NewBokeh.version, NewBokeh);
-          }
-          root.Bokeh = Bokeh;
-        }
-      });
-    }
-  }
-  // Give older versions of the autoload script a head-start to ensure
-  // they initialize before we start loading newer version.
-  setTimeout(load_or_wait, 100)
-}(window));
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/javascript">
-
-if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
-  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
-}
-
-
-    function JupyterCommManager() {
-    }
-
-    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
-      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
-        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
-        comm_manager.register_target(comm_id, function(comm) {
-          comm.on_msg(msg_handler);
-        });
-      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
-        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
-          comm.onMsg = msg_handler;
-        });
-      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
-        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
-          var messages = comm.messages[Symbol.asyncIterator]();
-          function processIteratorResult(result) {
-            var message = result.value;
-            var content = {data: message.data, comm_id};
-            var buffers = []
-            for (var buffer of message.buffers || []) {
-              buffers.push(new DataView(buffer))
-            }
-            var metadata = message.metadata || {};
-            var msg = {content, buffers, metadata}
-            msg_handler(msg);
-            return messages.next().then(processIteratorResult);
-          }
-          return messages.next().then(processIteratorResult);
-        })
-      }
-    }
-
-    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
-      if (comm_id in window.PyViz.comms) {
-        return window.PyViz.comms[comm_id];
-      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
-        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
-        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
-        if (msg_handler) {
-          comm.on_msg(msg_handler);
-        }
-      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
-        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
-        let retries = 0;
-        const open = () => {
-          if (comm.active) {
-            comm.open();
-          } else if (retries > 3) {
-            console.warn('Comm target never activated')
-          } else {
-            retries += 1
-            setTimeout(open, 500)
-          }
-        }
-        if (comm.active) {
-          comm.open();
-        } else {
-          setTimeout(open, 500)
-        }
-        if (msg_handler) {
-          comm.onMsg = msg_handler;
-        }
-      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
-        var comm_promise = google.colab.kernel.comms.open(comm_id)
-        comm_promise.then((comm) => {
-          window.PyViz.comms[comm_id] = comm;
-          if (msg_handler) {
-            var messages = comm.messages[Symbol.asyncIterator]();
-            function processIteratorResult(result) {
-              var message = result.value;
-              var content = {data: message.data};
-              var metadata = message.metadata || {comm_id};
-              var msg = {content, metadata}
-              msg_handler(msg);
-              return messages.next().then(processIteratorResult);
-            }
-            return messages.next().then(processIteratorResult);
-          }
-        })
-        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
-          return comm_promise.then((comm) => {
-            comm.send(data, metadata, buffers, disposeOnDone);
-          });
-        };
-        var comm = {
-          send: sendClosure
-        };
-      }
-      window.PyViz.comms[comm_id] = comm;
-      return comm;
-    }
-    window.PyViz.comm_manager = new JupyterCommManager();
-    
-
-
-var JS_MIME_TYPE = 'application/javascript';
-var HTML_MIME_TYPE = 'text/html';
-var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
-var CLASS_NAME = 'output';
-
-/**
- * Render data to the DOM node
- */
-function render(props, node) {
-  var div = document.createElement("div");
-  var script = document.createElement("script");
-  node.appendChild(div);
-  node.appendChild(script);
-}
-
-/**
- * Handle when a new output is added
- */
-function handle_add_output(event, handle) {
-  var output_area = handle.output_area;
-  var output = handle.output;
-  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
-    return
-  }
-  var id = output.metadata[EXEC_MIME_TYPE]["id"];
-  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
-  if (id !== undefined) {
-    var nchildren = toinsert.length;
-    var html_node = toinsert[nchildren-1].children[0];
-    html_node.innerHTML = output.data[HTML_MIME_TYPE];
-    var scripts = [];
-    var nodelist = html_node.querySelectorAll("script");
-    for (var i in nodelist) {
-      if (nodelist.hasOwnProperty(i)) {
-        scripts.push(nodelist[i])
-      }
-    }
-
-    scripts.forEach( function (oldScript) {
-      var newScript = document.createElement("script");
-      var attrs = [];
-      var nodemap = oldScript.attributes;
-      for (var j in nodemap) {
-        if (nodemap.hasOwnProperty(j)) {
-          attrs.push(nodemap[j])
-        }
-      }
-      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
-      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-      oldScript.parentNode.replaceChild(newScript, oldScript);
-    });
-    if (JS_MIME_TYPE in output.data) {
-      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
-    }
-    output_area._hv_plot_id = id;
-    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
-      window.PyViz.plot_index[id] = Bokeh.index[id];
-    } else {
-      window.PyViz.plot_index[id] = null;
-    }
-  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
-    var bk_div = document.createElement("div");
-    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
-    var script_attrs = bk_div.children[0].attributes;
-    for (var i = 0; i < script_attrs.length; i++) {
-      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
-    }
-    // store reference to server id on output_area
-    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
-  }
-}
-
-/**
- * Handle when an output is cleared or removed
- */
-function handle_clear_output(event, handle) {
-  var id = handle.cell.output_area._hv_plot_id;
-  var server_id = handle.cell.output_area._bokeh_server_id;
-  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
-  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
-  if (server_id !== null) {
-    comm.send({event_type: 'server_delete', 'id': server_id});
-    return;
-  } else if (comm !== null) {
-    comm.send({event_type: 'delete', 'id': id});
-  }
-  delete PyViz.plot_index[id];
-  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
-    var doc = window.Bokeh.index[id].model.document
-    doc.clear();
-    const i = window.Bokeh.documents.indexOf(doc);
-    if (i > -1) {
-      window.Bokeh.documents.splice(i, 1);
-    }
-  }
-}
-
-/**
- * Handle kernel restart event
- */
-function handle_kernel_cleanup(event, handle) {
-  delete PyViz.comms["hv-extension-comm"];
-  window.PyViz.plot_index = {}
-}
-
-/**
- * Handle update_display_data messages
- */
-function handle_update_output(event, handle) {
-  handle_clear_output(event, {cell: {output_area: handle.output_area}})
-  handle_add_output(event, handle)
-}
-
-function register_renderer(events, OutputArea) {
-  function append_mime(data, metadata, element) {
-    // create a DOM node to render to
-    var toinsert = this.create_output_subarea(
-    metadata,
-    CLASS_NAME,
-    EXEC_MIME_TYPE
-    );
-    this.keyboard_manager.register_events(toinsert);
-    // Render to node
-    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
-    render(props, toinsert[0]);
-    element.append(toinsert);
-    return toinsert
-  }
-
-  events.on('output_added.OutputArea', handle_add_output);
-  events.on('output_updated.OutputArea', handle_update_output);
-  events.on('clear_output.CodeCell', handle_clear_output);
-  events.on('delete.Cell', handle_clear_output);
-  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
-
-  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
-    safe: true,
-    index: 0
-  });
-}
-
-if (window.Jupyter !== undefined) {
-  try {
-    var events = require('base/js/events');
-    var OutputArea = require('notebook/js/outputarea').OutputArea;
-    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
-      register_renderer(events, OutputArea);
-    }
-  } catch(err) {
-  }
-}
-
-</script>
-</div>
-<div class="cell-output cell-output-display">
-
-</div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<div id="e7ebfc49-e0d9-4e6a-824a-f4fe854d7a0b">
-  <div id="bc768947-d9db-4696-9ee0-c974687c89d3" data-root-id="e7ebfc49-e0d9-4e6a-824a-f4fe854d7a0b" style="display: contents;"></div>
-</div>
-<script type="application/javascript">(function(root) {
-  var docs_json = {"e1afef08-24a1-4810-94d3-1b86c5487761":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"1def0ba5-0395-4568-a0b2-83834fe25314","attributes":{"notifications":{"type":"object","name":"Notifications","id":"bf33ffee-708a-4510-a7b2-09f3cdf10c5f"}}},"roots":[{"type":"object","name":"panel.models.layout.Column","id":"e7ebfc49-e0d9-4e6a-824a-f4fe854d7a0b","attributes":{"name":"Column00132","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"09d5522d-654b-4d00-a4d6-268b4676c737","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"3da83e76-4630-444c-adec-8006a5da80a3","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"b0e4326b-179a-41a2-9f2c-a7cf44536841","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"2460653c-9931-4548-87b6-f634857ad7fa","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/theme/native.css"}}],"min_width":300,"margin":0,"sizing_mode":"stretch_width","align":"start","children":[{"type":"object","name":"panel.models.widgets.TextInput","id":"ea0134ff-94a2-48a1-ae52-25877a2755f5","attributes":{"subscribed_events":{"type":"set","entries":["enter-pressed"]},"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"09d5522d-654b-4d00-a4d6-268b4676c737"},{"id":"b0e4326b-179a-41a2-9f2c-a7cf44536841"},{"id":"2460653c-9931-4548-87b6-f634857ad7fa"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Nexcloud URL","description":{"type":"object","name":"Tooltip","id":"29b6b67e-213d-4cd1-a40a-9f02d96593bd","attributes":{"syncable":false,"stylesheets":[":host { white-space: initial; max-width: 300px; }"],"position":"right","content":{"type":"object","name":"bokeh.models.dom.HTML","id":"1f9d2af4-8b56-47fa-ab0f-8743c7fcf720","attributes":{"html":["<p>URL of your Nextcloud server</p>\n"]}}}},"placeholder":"https://example.com/project-name","max_length":5000}},{"type":"object","name":"panel.models.widgets.TextInput","id":"7ddcff59-12e8-457d-a823-36e59e0cf639","attributes":{"subscribed_events":{"type":"set","entries":["enter-pressed"]},"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"09d5522d-654b-4d00-a4d6-268b4676c737"},{"id":"b0e4326b-179a-41a2-9f2c-a7cf44536841"},{"id":"2460653c-9931-4548-87b6-f634857ad7fa"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Account name or email","description":{"type":"object","name":"Tooltip","id":"43cd11e1-4c65-462d-b673-4339d5314054","attributes":{"syncable":false,"stylesheets":[":host { white-space: initial; max-width: 300px; }"],"position":"right","content":{"type":"object","name":"bokeh.models.dom.HTML","id":"50f3d9ce-c422-4bb6-a000-72f60833f7d1","attributes":{"html":["<p>Username/email of your Nextcloud account</p>\n"]}}}},"placeholder":"Account name or email","max_length":5000}},{"type":"object","name":"PasswordInput","id":"8703c0f1-4c9f-4e2a-9150-1a6a1e3351b5","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"09d5522d-654b-4d00-a4d6-268b4676c737"},{"id":"b0e4326b-179a-41a2-9f2c-a7cf44536841"},{"id":"2460653c-9931-4548-87b6-f634857ad7fa"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Password","description":{"type":"object","name":"Tooltip","id":"0312e2f0-9eff-4667-b254-26a5ad9b956f","attributes":{"syncable":false,"stylesheets":[":host { white-space: initial; max-width: 300px; }"],"position":"right","content":{"type":"object","name":"bokeh.models.dom.HTML","id":"14ea4722-8538-4bdf-b071-573f3a91a3bd","attributes":{"html":["<p>Password of your Nextcloud account</p>\n"]}}}},"placeholder":"Password","max_length":5000}},{"type":"object","name":"panel.models.widgets.Button","id":"c54cc206-5721-4c1c-b01e-91bfbfe6d684","attributes":{"button_type":"primary","subscribed_events":{"type":"set","entries":["button_click"]},"css_classes":["solid"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"09d5522d-654b-4d00-a4d6-268b4676c737"},{"type":"object","name":"ImportedStyleSheet","id":"5472756a-3948-424f-901d-48a07d791c9e","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/button.css"}},{"id":"b0e4326b-179a-41a2-9f2c-a7cf44536841"},{"id":"2460653c-9931-4548-87b6-f634857ad7fa"}],"margin":[5,10],"align":"start","label":"Save log in"}},{"type":"object","name":"panel.models.markup.HTML","id":"825cf0ca-840b-478f-a30e-4d2da81c818d","attributes":{"css_classes":["markdown","alert","alert-info"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"09d5522d-654b-4d00-a4d6-268b4676c737"},{"type":"object","name":"ImportedStyleSheet","id":"c7009375-88d9-487f-8faf-2bea57587826","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/alerts.css"}},{"id":"b0e4326b-179a-41a2-9f2c-a7cf44536841"},{"id":"2460653c-9931-4548-87b6-f634857ad7fa"}],"min_width":0,"margin":[5,10],"sizing_mode":"stretch_width","align":"start","text":"&lt;p&gt;Fill in all fields before pressing Save log in.&lt;/p&gt;\n"}}]}},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"3767f1e2-4e10-4810-b124-3b2ac84d5d4d","attributes":{"plot_id":"e7ebfc49-e0d9-4e6a-824a-f4fe854d7a0b","comm_id":"92cf3359f6f24fc589c5a03576f9547b","client_comm_id":"2dd7f18aeb614414bc113c7487938b27"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"e1afef08-24a1-4810-94d3-1b86c5487761","roots":{"e7ebfc49-e0d9-4e6a-824a-f4fe854d7a0b":"bc768947-d9db-4696-9ee0-c974687c89d3"},"root_ids":["e7ebfc49-e0d9-4e6a-824a-f4fe854d7a0b"]}];
-  var docs = Object.values(docs_json)
-  if (!docs) {
-    return
-  }
-  const version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
-  async function embed_document(root) {
-    var Bokeh = get_bokeh(root)
-    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
-    for (const render_item of render_items) {
-      for (const root_id of render_item.root_ids) {
-    const id_el = document.getElementById(root_id)
-    if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
-      const root_el = id_el.children[0]
-      root_el.id = root_el.id + '-rendered'
-      for (const child of root_el.children) {
-            // Ensure JupyterLab does not capture keyboard shortcuts
-            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
-        child.setAttribute('data-lm-suppress-shortcuts', 'true')
-      }
-    }
-      }
-    }
-  }
-  function get_bokeh(root) {
-    if (root.Bokeh === undefined) {
-      return null
-    } else if (root.Bokeh.version !== version) {
-      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(version)) {
-    return null
-      }
-      return root.Bokeh.versions.get(version);
-    } else if (root.Bokeh.version === version) {
-      return root.Bokeh
-    }
-    return null
-  }
-  function is_loaded(root) {
-    var Bokeh = get_bokeh(root)
-    return (Bokeh != null && Bokeh.Panel !== undefined && ( root.Tabulator !== undefined) && ( root.Tabulator !== undefined))
-  }
-  if (is_loaded(root)) {
-    embed_document(root);
-  } else {
-    var attempts = 0;
-    var timer = setInterval(function(root) {
-      if (is_loaded(root)) {
-        clearInterval(timer);
-        embed_document(root);
-      } else if (document.readyState == "complete") {
-        attempts++;
-        if (attempts > 200) {
-          clearInterval(timer);
-      var Bokeh = get_bokeh(root)
-      if (Bokeh == null || Bokeh.Panel == null) {
-            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
-      } else {
-        console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
-        embed_document(root)
-      }
-        }
-      }
-    }, 25, root)
-  }
-})(window);</script>
-</div>
-</div>
-<div id="050b6e8f" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fairdatanow <span class="im">import</span> DataViewer, login, filters </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Given the complete overview of all data files in a project, you typically want find a subset of files for inspection further exploration. As an example let’s try to to filter the Infrared Reflectography (IRR) image tiles that were taken from page 71803-01 depicting the Moon. In most cases it would be sufficient to filter the file list with a simple search string <code>search='Moon_IR tiles'</code> in combination with a <code>extensions=['.tif']</code> filter. However we see in this case that that we get a list with 73 files. So we need to be more specific. Additional filtering can be done with an advanced regular expression filter: <code>search='.*Moon_IR tiles_\d', use_regex=True</code>. The <code>_\d</code> part of the search pattern implies that after an underscore the filename should include at least one digit.</p>
-<div id="cdf7bd95" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://laboppad.nl/falnama-project'</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dv <span class="op">=</span> DataViewer(login(url), <span class="op">**</span>filters(search<span class="op">=</span><span class="st">'.*Moon_IR tiles_</span><span class="ch">\\</span><span class="st">d'</span>, use_regex<span class="op">=</span><span class="va">True</span>, extensions<span class="op">=</span>[<span class="st">'.tif'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3b6696da" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://laboppad.nl/falnama-project'</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dv <span class="op">=</span> DataViewer(login(url), <span class="op">**</span>filters(search<span class="op">=</span><span class="st">'.*Moon_IR tiles_</span><span class="ch">\\</span><span class="st">d'</span>, use_regex<span class="op">=</span><span class="va">True</span>, extensions<span class="op">=</span>[<span class="st">'.tif'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Connection with nextcloud server is ok.</code></pre>
 </div>
 </div>
-<div id="70d51076" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7bdb6800" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 </div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div id="d48d4545-8ba5-4e0b-ae7b-74da7bb8cbe5">
-  <div id="a5038ec4-38a8-49ee-83bd-8f3607601f23" data-root-id="d48d4545-8ba5-4e0b-ae7b-74da7bb8cbe5" style="display: contents;"></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="ea5b4000-8f30-457f-9de5-d18510e16fd9">
+  <div id="e5bef33f-df09-4b70-9e1b-0b96d993ad6d" data-root-id="ea5b4000-8f30-457f-9de5-d18510e16fd9" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"3f1f9de8-3bf8-4370-84d6-37feef0b11b9":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"eecd571e-6ce4-40ea-bd23-dd01023c7fea","attributes":{"notifications":{"type":"object","name":"Notifications","id":"fe970a39-b940-4e88-958a-c95d7bf63910"}}},"roots":[{"type":"object","name":"panel.models.layout.Column","id":"d48d4545-8ba5-4e0b-ae7b-74da7bb8cbe5","attributes":{"name":"Column00165","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"6ac6048f-dfa3-4ab4-acab-57014972d249","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"22bc256c-b070-4b80-8dc4-2fef4d074af1","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"08670a41-b03e-4acb-81de-6ee07e90e7a7","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/theme/native.css"}}],"margin":0,"align":"start","children":[{"type":"object","name":"Row","id":"a70d34ce-8507-4a23-9887-08d0537ed261","attributes":{"name":"Row00149","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"6ac6048f-dfa3-4ab4-acab-57014972d249"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.widgets.TextInput","id":"83d412df-f5bd-44f4-a1af-ced4fdb74b67","attributes":{"subscribed_events":{"type":"set","entries":["enter-pressed"]},"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Search","value":".*Moon_IR tiles_\\d","max_length":5000}},{"type":"object","name":"Checkbox","id":"09a34007-4718-4fc8-bae7-d6c3595adc8b","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":[5,10],"align":"start","active":true,"label":"Use regex"}},{"type":"object","name":"Checkbox","id":"4e4f08dc-5052-42a9-9213-3860b7411f48","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":[5,10],"align":"start","active":true,"label":"Show filters"}},{"type":"object","name":"panel.models.layout.Column","id":"7f6b916d-399f-4cc0-9a32-5a716cc55f04","attributes":{"name":"Column00153","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"6ac6048f-dfa3-4ab4-acab-57014972d249"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.layout.Column","id":"854d33c7-5599-4c48-9e49-10b1df6a3819","attributes":{"name":"WidgetBox00161","css_classes":["panel-widget-box"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"type":"object","name":"ImportedStyleSheet","id":"ab3018d5-39f6-46e5-bfac-f3fbdc4ecf4e","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/widgetbox.css"}},{"id":"6ac6048f-dfa3-4ab4-acab-57014972d249"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"2e6676e3-2b13-4af5-9d6b-13d6452ee8b6","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"type":"object","name":"ImportedStyleSheet","id":"04c2e4a8-5a4e-4ba7-b6d3-aef34e7a5cc5","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/markdown.css"}},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":[5,10],"align":"start","text":"&lt;h1 id=&quot;filters&quot;&gt;Filters &lt;a class=&quot;header-anchor&quot; href=&quot;#filters&quot;&gt;\u00b6&lt;/a&gt;&lt;/h1&gt;\n"}},{"type":"object","name":"MultiChoice","id":"af6adef2-4c96-4ead-b3d9-372883071dc4","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"type":"object","name":"ImportedStyleSheet","id":"58c8d9f9-ed2e-48d2-9fe9-1af3b8f7fbbb","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/multichoice.css"}},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Columns","options":["path","size","ext","byte_size","modified","isdir"],"value":["path","size","modified","ext"],"placeholder":""}},{"type":"object","name":"MultiChoice","id":"1fa253a4-029b-45c3-84ba-1ae625c1dde5","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"58c8d9f9-ed2e-48d2-9fe9-1af3b8f7fbbb"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Extensions","options":["",".bcf",".czi",".datastack",".db",".doc",".docx",".heic",".html",".jpeg",".jpg",".md",".mov",".mp4",".ods",".odt",".pdf",".png",".pptx",".psd",".raw",".rpl",".set",".tif",".txt",".xlsx",".zip"],"value":[".tif"],"placeholder":""}},{"type":"object","name":"Checkbox","id":"66f29a53-4915-4cac-beec-5fbdad38bd72","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":[5,10],"align":"start","label":"Show directories"}},{"type":"object","name":"panel.models.widgets.Button","id":"26f9db8d-99fe-4fac-87da-41116d38337a","attributes":{"button_type":"primary","subscribed_events":{"type":"set","entries":["button_click"]},"css_classes":["solid"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"type":"object","name":"ImportedStyleSheet","id":"4083010b-2f8b-495c-9b46-70323956a875","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/button.css"}},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":[5,10],"align":"start","label":"Clear filters"}}]}}]}}]}},{"type":"object","name":"panel.models.tabulator.DataTabulator","id":"0ddb78a6-541a-4904-a5f3-b08c12037657","attributes":{"subscribed_events":{"type":"set","entries":["cell-click","selection-change","table-edit"]},"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"type":"object","name":"ImportedStyleSheet","id":"f50f6e37-0cec-4aaf-9f7a-8b95a7348029","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/font-awesome/css/all.min.css"}},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"},{"type":"object","name":"ImportedStyleSheet","id":"1ffcbb54-a83c-4115-930a-0dddebd85aed","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/tabulator-tables@6.4.0/dist/css/tabulator_simple.min.css"}}],"height":350,"min_height":350,"margin":[5,10],"align":"start","configuration":{"type":"map","entries":[["selectable",true],["columns",[{"type":"map","entries":[["field","path"]]},{"type":"map","entries":[["field","size"]]},{"type":"map","entries":[["field","modified"],["sorter","timestamp"]]},{"type":"map","entries":[["field","ext"]]}]],["dataTree",false],["height",350]]},"columns":[{"type":"object","name":"TableColumn","id":"a24ab808-62c6-4a76-8da5-d1e47ce9fe85","attributes":{"field":"path","title":"path","width":0,"formatter":{"type":"object","name":"StringFormatter","id":"46510767-a5a2-4490-82ee-ba7886ecb9d7","attributes":{"null_format":""}},"editor":{"type":"object","name":"StringEditor","id":"ae4ac928-6076-423b-bd92-cdef92267870"}}},{"type":"object","name":"TableColumn","id":"e5a543bf-0977-42e2-b4a2-3360d91ad77e","attributes":{"field":"size","title":"size","width":0,"formatter":{"type":"object","name":"StringFormatter","id":"ee255126-e6bd-4c06-9218-8c0b95dd9ccf","attributes":{"null_format":""}},"editor":{"type":"object","name":"StringEditor","id":"397b29df-4cf8-471a-a7dc-6e9a17878d93"}}},{"type":"object","name":"TableColumn","id":"baf033d0-10f2-4759-937b-156ce248b607","attributes":{"field":"modified","title":"modified","width":0,"formatter":{"type":"object","name":"DateFormatter","id":"af64f613-2f32-4397-b043-2e2f3dae2431","attributes":{"text_align":{"type":"value","value":"right"},"format":"%Y-%m-%d %H:%M:%S"}},"editor":{"type":"object","name":"DateEditor","id":"e1c37e9c-a932-4f01-b8f4-7960818c7f30"}}},{"type":"object","name":"TableColumn","id":"e8921065-51e9-4610-9f33-06df9e21f8e4","attributes":{"field":"ext","title":"ext","width":0,"formatter":{"type":"object","name":"StringFormatter","id":"69354bb6-efe6-4ed6-872f-014c88e2b350","attributes":{"null_format":""}},"editor":{"type":"object","name":"StringEditor","id":"4d895a72-188f-4bd8-ba6f-ad920b2ac64e"}}}],"editable":false,"hidden_columns":["index"],"layout":"fit_data_table","source":{"type":"object","name":"ColumnDataSource","id":"87811827-50bf-41d0-a135-22b82c9d3014","attributes":{"selected":{"type":"object","name":"Selection","id":"bc036c65-a64d-4296-ab30-35c139fa43b2","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"0e5fa95e-88e2-4690-aac9-f2bf547d7c72"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"H4sIAAEAAAAA/w3DWxZCABQAwFtRIn7Y/wbTC6lEmTlnznVE68WrN+8+7OwdfDr68u3Hya+ziz//RhOxcevOxNS9BzOP5haeLK1cAdhPjVeQAAAA"},"shape":[36],"dtype":"int32","order":"little"}],["path",{"type":"ndarray","array":["falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0063.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0064.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0065.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0066.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0067.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0068.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0069.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0070.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0071.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0072.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0073.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0074.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0075.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0076.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0077.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0078.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0079.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0080.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0081.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0082.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0083.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0084.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0085.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0086.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0087.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0088.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0089.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0090.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0091.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0092.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0093.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0094.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0095.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0096.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0097.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0098.tif"],"shape":[36],"dtype":"object","order":"little"}],["size",{"type":"ndarray","array":["640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB"],"shape":[36],"dtype":"object","order":"little"}],["modified",{"type":"ndarray","array":{"type":"bytes","data":"H4sIAAEAAAAA/2NgmJH7+H6FE8MojTUcAOE73yQgAQAA"},"shape":[36],"dtype":"float64","order":"little"}],["ext",{"type":"ndarray","array":[".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif"],"shape":[36],"dtype":"object","order":"little"}]]}}},"cell_styles":{"type":"map","entries":[["id","6b6c309622a84c0b9a2d2555b32fccd2"],["data",{"type":"map"}]]},"page":1,"select_mode":true,"selectable_rows":null}},{"type":"object","name":"panel.models.layout.Column","id":"33268a27-9732-4a2e-ad99-9f371e38d58f","attributes":{"name":"Column00169","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"6ac6048f-dfa3-4ab4-acab-57014972d249"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"662552df-07b6-4459-a454-e72b88824aee","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"be7fe8a4-b0db-4da0-aa0a-c45fcead35fc"},{"id":"04c2e4a8-5a4e-4ba7-b6d3-aef34e7a5cc5"},{"id":"22bc256c-b070-4b80-8dc4-2fef4d074af1"},{"id":"08670a41-b03e-4acb-81de-6ee07e90e7a7"}],"margin":[5,10],"align":"start","text":"&lt;p&gt;Showing 36 out of 8131 rows | Total size: 22.5 MiB&lt;/p&gt;\n"}}]}}]}},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"139ed891-a0cb-40a8-b141-22575442dacf","attributes":{"plot_id":"d48d4545-8ba5-4e0b-ae7b-74da7bb8cbe5","comm_id":"193d680a7a6441cf910d5c0e13475237","client_comm_id":"89ece83b9d5646d9828831f2170e60f3"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"3f1f9de8-3bf8-4370-84d6-37feef0b11b9","roots":{"d48d4545-8ba5-4e0b-ae7b-74da7bb8cbe5":"a5038ec4-38a8-49ee-83bd-8f3607601f23"},"root_ids":["d48d4545-8ba5-4e0b-ae7b-74da7bb8cbe5"]}];
+  var docs_json = {"3924a18f-9224-4391-86b6-d8b4a187a985":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"d3470d4b-53fa-4b94-b995-7107011b1bab","attributes":{"notifications":{"type":"object","name":"Notifications","id":"c8dd5df4-9c24-452e-8b0b-166443ad5839"}}},"roots":[{"type":"object","name":"panel.models.layout.Column","id":"ea5b4000-8f30-457f-9de5-d18510e16fd9","attributes":{"name":"Column00147","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"583deb0f-e112-40aa-b5b5-8baa15876237","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/theme/native.css"}}],"margin":0,"align":"start","children":[{"type":"object","name":"Row","id":"1cb9feb5-b8f5-4098-9ac9-01534fff234f","attributes":{"name":"Row00131","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"583deb0f-e112-40aa-b5b5-8baa15876237"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.widgets.TextInput","id":"2bc45709-648f-4355-b5b1-7f682ba38a0c","attributes":{"subscribed_events":{"type":"set","entries":["enter-pressed"]},"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Search","value":".*Moon_IR tiles_\\d","max_length":5000}},{"type":"object","name":"Checkbox","id":"ec83f535-e753-4942-b714-007b75e0716c","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":[5,10],"align":"start","active":true,"label":"Use regex"}},{"type":"object","name":"Checkbox","id":"90eb5a7f-d1cd-4bae-96cc-7086eadddbb0","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":[5,10],"align":"start","active":true,"label":"Show filters"}},{"type":"object","name":"panel.models.layout.Column","id":"5ef7c879-0c0e-47be-ac72-6421faa2cc49","attributes":{"name":"Column00135","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"583deb0f-e112-40aa-b5b5-8baa15876237"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.layout.Column","id":"61b86e9e-fa1a-4581-9fdf-fae870506501","attributes":{"name":"WidgetBox00143","css_classes":["panel-widget-box"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"type":"object","name":"ImportedStyleSheet","id":"5a96d28e-ab71-4b88-8923-7d5d09f95c7c","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/widgetbox.css"}},{"id":"583deb0f-e112-40aa-b5b5-8baa15876237"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"2a4a4dec-0764-4613-97b4-4c643ba0f5a4","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"type":"object","name":"ImportedStyleSheet","id":"faf8a180-bc19-40af-981f-4093146a0e1e","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/markdown.css"}},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":[5,10],"align":"start","text":"&lt;h1 id=&quot;filters&quot;&gt;Filters &lt;a class=&quot;header-anchor&quot; href=&quot;#filters&quot;&gt;\u00b6&lt;/a&gt;&lt;/h1&gt;\n"}},{"type":"object","name":"MultiChoice","id":"c3e4fe6e-56a7-4976-aff4-c1f43a9e6e5b","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"type":"object","name":"ImportedStyleSheet","id":"19c1bb55-3dbe-4b65-a5b1-e4aeab80ae6a","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/multichoice.css"}},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Columns","options":["path","size","ext","byte_size","modified","isdir"],"value":["path","size","modified","ext"],"placeholder":""}},{"type":"object","name":"MultiChoice","id":"b260f8a1-c399-4604-99b0-3d77d7a14ed9","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"19c1bb55-3dbe-4b65-a5b1-e4aeab80ae6a"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"width":300,"min_width":300,"margin":[5,10],"align":"start","title":"Extensions","options":["",".bcf",".czi",".datastack",".db",".doc",".docx",".heic",".html",".jpeg",".jpg",".md",".mov",".mp4",".ods",".odt",".pdf",".png",".pptx",".psd",".raw",".rpl",".set",".tif",".txt",".xlsx",".zip"],"value":[".tif"],"placeholder":""}},{"type":"object","name":"Checkbox","id":"e476c3be-b3b1-41f1-b0f4-e6249d36c7aa","attributes":{"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":[5,10],"align":"start","label":"Show directories"}},{"type":"object","name":"panel.models.widgets.Button","id":"aa10d395-8e95-4a39-b24c-096586675377","attributes":{"button_type":"primary","subscribed_events":{"type":"set","entries":["button_click"]},"css_classes":["solid"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"type":"object","name":"ImportedStyleSheet","id":"5bf17f4c-1b19-4410-af44-a9c8dfd8c8ca","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/css/button.css"}},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":[5,10],"align":"start","label":"Clear filters"}}]}}]}}]}},{"type":"object","name":"panel.models.tabulator.DataTabulator","id":"ded97469-a8fe-497c-b703-5f853c6539e8","attributes":{"subscribed_events":{"type":"set","entries":["table-edit","selection-change","cell-click"]},"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"type":"object","name":"ImportedStyleSheet","id":"af7369bc-39bf-4eb5-8957-d92c8cd57d5e","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/font-awesome/css/all.min.css"}},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"},{"type":"object","name":"ImportedStyleSheet","id":"212d7b72-b6ff-4ad0-badf-3aeb62b35d7a","attributes":{"url":"https://cdn.holoviz.org/panel/1.9.4/dist/bundled/datatabulator/tabulator-tables@6.4.0/dist/css/tabulator_simple.min.css"}}],"height":350,"min_height":350,"margin":[5,10],"align":"start","configuration":{"type":"map","entries":[["selectable",true],["columns",[{"type":"map","entries":[["field","path"]]},{"type":"map","entries":[["field","size"]]},{"type":"map","entries":[["field","modified"],["sorter","timestamp"]]},{"type":"map","entries":[["field","ext"]]}]],["dataTree",false],["height",350]]},"columns":[{"type":"object","name":"TableColumn","id":"7901ef8c-ccbd-4e5d-8107-947ebb6d4c44","attributes":{"field":"path","title":"path","width":0,"formatter":{"type":"object","name":"StringFormatter","id":"d676d619-4d96-4e26-8291-0fcda335e59a","attributes":{"null_format":""}},"editor":{"type":"object","name":"StringEditor","id":"c89958ba-9952-41fb-9783-e3e3431e24c3"}}},{"type":"object","name":"TableColumn","id":"c4954ace-a540-4aea-8c38-a79aec0a715d","attributes":{"field":"size","title":"size","width":0,"formatter":{"type":"object","name":"StringFormatter","id":"9d4de4e6-67d1-45c4-a0b8-dfb9f87f17fd","attributes":{"null_format":""}},"editor":{"type":"object","name":"StringEditor","id":"ead50bcb-fe4f-48fd-aa12-5d2acdf265ae"}}},{"type":"object","name":"TableColumn","id":"ae73864a-93fd-4413-bf97-f625ebb27107","attributes":{"field":"modified","title":"modified","width":0,"formatter":{"type":"object","name":"DateFormatter","id":"13b6ea59-66d7-46da-bc23-511966258a9d","attributes":{"text_align":{"type":"value","value":"right"},"format":"%Y-%m-%d %H:%M:%S"}},"editor":{"type":"object","name":"DateEditor","id":"77facb9c-e147-4237-b419-f08ee7906588"}}},{"type":"object","name":"TableColumn","id":"8e2609c6-27ef-4efe-9270-59ec788696a9","attributes":{"field":"ext","title":"ext","width":0,"formatter":{"type":"object","name":"StringFormatter","id":"9246cd66-aa6d-4d3e-aeff-8c19cf708995","attributes":{"null_format":""}},"editor":{"type":"object","name":"StringEditor","id":"db2da76e-d2a3-414e-b54c-a4510bc6ca65"}}}],"editable":false,"hidden_columns":["index"],"layout":"fit_data_table","source":{"type":"object","name":"ColumnDataSource","id":"0c7c5067-e6d8-44cb-b903-63ce491e52f0","attributes":{"selected":{"type":"object","name":"Selection","id":"4bcccbab-d812-4d02-836c-5c2c83e78770","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"c5313fb2-c050-4326-9940-b7c348fbe0c8"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"H4sIAAEAAAAA/w3DWxZCABQAwFtRIn7Y/wbTC6lEmTlnznVE68WrN+8+7OwdfDr68u3Hya+ziz//RhOxcevOxNS9BzOP5haeLK1cAdhPjVeQAAAA"},"shape":[36],"dtype":"int32","order":"little"}],["path",{"type":"ndarray","array":["falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0063.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0064.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0065.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0066.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0067.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0068.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0069.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0070.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0071.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0072.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0073.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0074.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0075.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0076.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0077.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0078.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0079.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0080.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0081.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0082.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0083.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0084.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0085.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0086.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0087.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0088.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0089.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0090.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0091.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0092.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0093.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0094.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0095.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0096.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0097.tif","falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0098.tif"],"shape":[36],"dtype":"object","order":"little"}],["size",{"type":"ndarray","array":["640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB","640.3 KiB"],"shape":[36],"dtype":"object","order":"little"}],["modified",{"type":"ndarray","array":{"type":"bytes","data":"H4sIAAEAAAAA/2NgmJH7+H6FE8MojTUcAOE73yQgAQAA"},"shape":[36],"dtype":"float64","order":"little"}],["ext",{"type":"ndarray","array":[".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif",".tif"],"shape":[36],"dtype":"object","order":"little"}]]}}},"cell_styles":{"type":"map","entries":[["id","6761237f4d4e4b3a95fb90b262a6863d"],["data",{"type":"map"}]]},"page":1,"select_mode":true,"selectable_rows":null}},{"type":"object","name":"panel.models.layout.Column","id":"6a849099-e07f-40fa-8b2a-aebc4db7daf7","attributes":{"name":"Column00151","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"583deb0f-e112-40aa-b5b5-8baa15876237"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":0,"align":"start","children":[{"type":"object","name":"panel.models.markup.HTML","id":"9129a4ac-8fd7-41ac-bb13-69707f0ee24d","attributes":{"css_classes":["markdown"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  width: calc(min(40px, 300px));\n  height: calc(min(40px, 300px));\n  mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n  -webkit-mask-size: calc(min(40px, 300px)) calc(min(40px, 300px));\n}",{"id":"a79bbb69-4010-4b03-8d7b-5e2209f84ff8"},{"id":"faf8a180-bc19-40af-981f-4093146a0e1e"},{"id":"1ef0e9b7-a1e7-4daa-a140-240d51e6e326"},{"id":"6c2d9d36-afe5-4cac-a834-e7e59eb1ec6c"}],"margin":[5,10],"align":"start","text":"&lt;p&gt;Showing 36 out of 8131 rows | Total size: 22.5 MiB&lt;/p&gt;\n"}}]}}]}},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"6002230d-1bbf-4983-93e6-7ef60318efe2","attributes":{"plot_id":"ea5b4000-8f30-457f-9de5-d18510e16fd9","comm_id":"749e2420f7c5428c8d103ae1092a73ca","client_comm_id":"69aca3ae41264f048256afa8ffc064ed"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"3924a18f-9224-4391-86b6-d8b4a187a985","roots":{"ea5b4000-8f30-457f-9de5-d18510e16fd9":"e5bef33f-df09-4b70-9e1b-0b96d993ad6d"},"root_ids":["ea5b4000-8f30-457f-9de5-d18510e16fd9"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1592,16 +961,16 @@ Note
 </div>
 </div>
 <p>We can now download these files into a cache folder on your local computer in order to process them further. This can be done easily with the <code>.download_filtered()</code> method.</p>
-<div id="9cc61afb" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> dv.download_filtered() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="da64662d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> dv.download_filtered() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ready with downloading 36 selected remote files to local cache: /home/frank/.cache/fairdatanow                                                                      </code></pre>
 </div>
 </div>
 <p>The file paths can now be inspected. The first four files look like this:</p>
-<div id="eb854746" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>files[:<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="6fc13f4f" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>files[:<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>['/home/frank/.cache/fairdatanow/falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0063.tif',
  '/home/frank/.cache/fairdatanow/falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0064.tif',
  '/home/frank/.cache/fairdatanow/falnama-project/07. Results/09. IRR/IRR-tiles/71803-01_IRR 1600 nm/71803-01_Moon_IR tiles_0065.tif',
@@ -1609,21 +978,21 @@ Note
 </div>
 </div>
 <p>Let’s create a plot to see what they look like…</p>
-<div id="b589e8e5" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f237f61d" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a853f1b8" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">6</span>, ncols<span class="op">=</span><span class="dv">6</span>) </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> axs.flatten()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, <span class="bu">file</span> <span class="kw">in</span> <span class="bu">zip</span>(axs, files):</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    im <span class="op">=</span> plt.imread(<span class="bu">file</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    ax.imshow(im, cmap<span class="op">=</span><span class="st">'Greys_r'</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="aa0490a0" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">6</span>, ncols<span class="op">=</span><span class="dv">6</span>) </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> axs.flatten()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, <span class="bu">file</span> <span class="kw">in</span> <span class="bu">zip</span>(axs, files):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    im <span class="op">=</span> plt.imread(<span class="bu">file</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    ax.imshow(im, cmap<span class="op">=</span><span class="st">'Greys_r'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="10_exploring-your-remote-data-in-breeze_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="10_exploring-your-remote-data-in-breeze_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

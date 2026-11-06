@@ -41,14 +41,6 @@ Next time you access the Nextcloud server you can retrieve these credentials wit
 To get started you need to import the `DataViewer` class from the package and instantiate it with the Nextcloud `login()` and `**filters()` functions. Depending on the amount of files in the cloud storage it might take some time to build the interactive file table. In this example we want to create a table for 8118 files (and counting) from the Falnama project which takes about 13 seconds. 
 
 ```{python}
-from fairdatanow import SaveLogin
-import panel as pn
-pn.extension()
-
-SaveLogin()
-```
-
-```{python}
 from fairdatanow import DataViewer, login, filters 
 ```
 
