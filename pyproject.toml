@@ -50,5 +50,14 @@ dev = [
     "pyvips[binary]>=3.2.0",
 ]
 
-[tool.jupytext]
-formats = "ipynb,qmd"
+#[tool.jupytext]
+#formats = "ipynb,qmd"
+
+[[tool.jupytext.formats]]
+"notebooks/" = "qmd"
+"_nbs/_docs/" = "ipynb"
+
+[[tool.jupytext.formats]]
+"src/fairdatanow/" = "py:percent"
+"_nbs/_src/" = "ipynb"
+
